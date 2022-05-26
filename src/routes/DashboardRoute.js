@@ -1,7 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import SidebarComponent from "../components/SidebarComponent";
-import DashboardScreen from "../screens/DashboardScreen";
-import IngresosScreen from "../screens/IngresosScreen";
+import DashboardScreen from "../screens/inventory/DashboardScreen";
+import IngresosScreen from "../screens/inventory/IngresosScreen";
+
 
 const DashboardRoute = () => {
 

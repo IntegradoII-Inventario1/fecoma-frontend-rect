@@ -1,8 +1,7 @@
 import { Route, Routes } from "react-router-dom"
-import LoginScreen from "../screens/LoginScreen"
-import RegisterScreen from "../screens/RegisterScreen"
+import LoginScreen from "../screens/auth/LoginScreen"
+import RegisterScreen from "../screens/auth/RegisterScreen"
 import FondoLogin from "../utils/FondoLogin"
-
 
 const AuthRoute = () => {
   return (

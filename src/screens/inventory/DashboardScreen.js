@@ -1,7 +1,7 @@
-import LineChartComponent from "../components/LineChartComponent";
-import StatsCardComponent from "../components/StatsCardComponent";
-import { datos } from "../utils/datos";
-import HeadComponent from "../components/HeadComponent";
+import LineChartComponent from "../../components/LineChartComponent";
+import StatsCardComponent from "../../components/StatsCardComponent";
+import { datos } from "../../utils/datos";
+import HeadComponent from "../../components/HeadComponent";
 
 const DashboardScreen = () => {
   return (
