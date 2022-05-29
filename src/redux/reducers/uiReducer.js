@@ -3,7 +3,8 @@ import { types } from "../types/types";
 const initialState = {
   modalIngresoOpen:false,
   modalProvedorOpen:false,
-  modalVentaOpen:false
+  modalVentaOpen:false,
+  modalEmpleadoOpen:false
 }
 
 export const uiReducer = (state=initialState,action) => {
@@ -42,6 +43,20 @@ export const uiReducer = (state=initialState,action) => {
         ...state,
         modalVentaOpen:false
       }
+
+    case types.uiOpenModalEmpleado:
+      return {
+        ...state,
+        modalEmpleadoOpen:true
+      }
+
+    case types.uiCloseModalEmpleado:
+      return {
+        ...state,
+        modalEmpleadoOpen:false
+      }
+
+    
 
     default:
       return state;

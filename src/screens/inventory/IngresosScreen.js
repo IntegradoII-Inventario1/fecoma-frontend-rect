@@ -5,25 +5,26 @@ import IngresoModal from "../../components/modals/IngresoModal";
 import { useDispatch } from "react-redux";
 import { uiOnpenModalIngreso } from "../../redux/actions/ui";
 const IngresosScreen = () => {
-
   const dispatch = useDispatch();
 
   const abrirModal = () => {
-      dispatch(uiOnpenModalIngreso())
-  }
+    dispatch(uiOnpenModalIngreso());
+  };
 
   return (
     <>
       <HeadComponent titulo="Ingresos" />
       <div className="dark:text-gray-300 flex flex-col">
         <div>
-          <button onClick={abrirModal} className="bg-green-600 dark:bg-opacity-70 mb-10 text-white dark:text-gray-300 p-2 font-semibold rounded-lg active:scale-95 hover:bg-green-500 cursor-pointer">
+          <button
+            onClick={abrirModal}
+            className="bg-green-600 dark:bg-opacity-70 mb-10 text-white dark:text-gray-300 p-2 font-semibold rounded-lg active:scale-95 hover:bg-green-500 cursor-pointer"
+          >
             Ingresar nuevo producto
           </button>
-          
         </div>
 
-        <IngresoModal/>
+        <IngresoModal />
 
         <div className="overflow-auto w-full h-[480px] rounded-lg shadow mb-2">
           <table className="w-full shadow-inner shadow-gray-400">

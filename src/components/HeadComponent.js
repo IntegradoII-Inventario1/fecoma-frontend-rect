@@ -3,7 +3,8 @@ import TimeClock from '../utils/TimeClock'
 const HeadComponent = ({titulo="Sin titulo"}) => {
   return (
     <>
-    <header>
+    <header className='mt-4 md:mt-0'>
+
         <h1 className="text-3xl font-semibold leading-loose text-gray-600 dark:text-white">
           {titulo}
         </h1>

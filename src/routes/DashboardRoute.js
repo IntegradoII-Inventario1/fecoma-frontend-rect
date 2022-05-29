@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import SidebarComponent from "../components/SidebarComponent";
+import AdminScreen from "../screens/inventory/AdminScreen";
 import DashboardScreen from "../screens/inventory/DashboardScreen";
 import IngresosScreen from "../screens/inventory/IngresosScreen";
 
@@ -16,6 +17,7 @@ const DashboardRoute = () => {
            
               <Route path="dashboard" element={<DashboardScreen />} />
               <Route path="ingresos" element={<IngresosScreen />} />
+              <Route path="admin" element={<AdminScreen/>} />
               <Route path="/" element={<DashboardScreen />} />
             
           </Routes>
