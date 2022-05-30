@@ -58,7 +58,7 @@ const activeMenu = () => {
             ))}
 
             <button onClick={switch_toggle} className={`${darkMode?"bg-white":"bg-primary"} ml-2 lg:-ml-1 w-12 lg:w-16  h-full  rounded-2xl flex items-center transition duration-300 focus:outline-none shadow`}>
-                <div className={`${darkMode?"bg-gray-800 translate-x-3 lg:translate-x-full ml-2":"bg-yellow-500 translate-x-1 w-7"} h-7 relative rounded-full transition duration-500 transform p-[0.20rem] text-white flex justify-center items-center`}>
+                <div className={`${darkMode?"bg-gray-800 translate-x-3 lg:translate-x-full ml-2":"bg-orange-600 translate-x-1 w-7"} h-7 relative rounded-full transition duration-500 transform p-[0.20rem] text-white flex justify-center items-center`}>
                     {
                         darkMode ?  <FaMoon size={20}/> : <FaSun size={20}/>
                     }
@@ -71,11 +71,11 @@ const activeMenu = () => {
             <div className='w-full h-screen z-20 dark:bg-gray-600 p-4 bg-white absolute md:hidden'>
             <div className='w-full '>
                 {menu_icons.map(icon => (
-                    <div className={`${name === icon.name? "bg-primary w-full p-2  ":"border-b-[1px] p-2 border-gray-200"}`} key={icon.id}>
+                    <div className={`${name === icon.name? "bg-primary  w-full p-2  ":"border-b-[1px] p-2 border-gray-200"}`} key={icon.id}>
                         <Link to={icon.route} className="w-full" onClick={()=>setBurguerActive(false)}>
                                 <button
                                 onClick={() => selectIcon(icon.name)}
-                                className={`${name === icon.name ? "text-white shadow-primary bg-primary":"text-primary"} flex items-center p-2 w-full lg:p-4 justify-center rounded-xl `}>
+                                className={`${name === icon.name ? "text-white shadow-primary bg-primary":"text-orange-500"} flex items-center p-2 w-full lg:p-4 justify-center rounded-xl `}>
                                     <icon.icon size={25}/>
                                     <p className='ml-2'>{icon.name}</p>
                                 </button>

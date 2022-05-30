@@ -1,65 +1,85 @@
 import { types } from "../types/types";
 
 const initialState = {
-  modalIngresoOpen:false,
-  modalProvedorOpen:false,
-  modalVentaOpen:false,
-  modalEmpleadoOpen:false
-}
+  modalIngresoOpen: false,
+  modalProvedorOpen: false,
+  modalVentaOpen: false,
+  modalEmpleadoOpen: false,
+  modalCategoriaOpen: false,
+  modalPuestoOpen: false,
+};
 
-export const uiReducer = (state=initialState,action) => {
-
+export const uiReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.uiOpenModalIngreso:
       return {
         ...state,
-        modalIngresoOpen:true
-      }
+        modalIngresoOpen: true,
+      };
 
     case types.uiCloseModalIngreso:
       return {
         ...state,
-        modalIngresoOpen:false
-      }
+        modalIngresoOpen: false,
+      };
     case types.uiOpenModalProveedores:
       return {
         ...state,
-        modalProvedorOpen:true
-      }
+        modalProvedorOpen: true,
+      };
 
     case types.uiCloseModalProveedores:
       return {
         ...state,
-        modalProvedorOpen:false
-      }
+        modalProvedorOpen: false,
+      };
     case types.uiOpenModalVentas:
       return {
         ...state,
-        modalVentaOpen:true
-      }
+        modalVentaOpen: true,
+      };
 
     case types.uiCloseModalVentas:
       return {
         ...state,
-        modalVentaOpen:false
-      }
+        modalVentaOpen: false,
+      };
 
     case types.uiOpenModalEmpleado:
       return {
         ...state,
-        modalEmpleadoOpen:true
-      }
+        modalEmpleadoOpen: true,
+      };
 
     case types.uiCloseModalEmpleado:
       return {
         ...state,
-        modalEmpleadoOpen:false
-      }
+        modalEmpleadoOpen: false,
+      };
+    case types.uiOpenModalCategoria:
+      return {
+        ...state,
+        modalCategoriaOpen: true,
+      };
 
-    
+    case types.uiCloseModalCategoria:
+      return {
+        ...state,
+        modalCategoriaOpen: false,
+      };
+    case types.uiOpenModalPuesto:
+      return {
+        ...state,
+        modalPuestoOpen: true,
+      };
+
+    case types.uiCloseModalPuesto:
+      return {
+        ...state,
+        modalPuestoOpen: false,
+      };
 
     default:
       return state;
   }
-
-}
+};

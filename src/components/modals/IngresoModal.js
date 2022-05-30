@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Modal from "react-modal";
+import {BiRename} from 'react-icons/bi';
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { uiCloseModalIngreso } from "../../redux/actions/ui";
@@ -50,15 +51,16 @@ const IngresoModal = () => {
       onRequestClose={closeModal}
       style={customStyles}
       closeTimeoutMS={200}
-      className="bg-gray-900 flex fixed outline-none rounded-md p-4"
+      className="bg-gray-800 flex fixed outline-none rounded-md p-4"
       overlayClassName="modal-fondo"
     >
       <div className="max-w-[400px] text-gray-200 w-[400px] h-[540px] max-h-[540px]">
-        <h1 className="text-lg font-bold"> Nuevo evento </h1>
+        <h1 className="text-2xl font-bold text-center dark:text-white text-gray-600 py-1"> Nuevo evento </h1>
         <hr className="border-gray-600"/>
         <form onSubmit={handleSubmitForm} className="container">
           <div className="flex flex-col py-2">
             <label>Nombre</label>
+            <BiRename/>
             <input onChange={handleInputChange} name="nombre" value={nombre} className="rounded-md p-1 placeholder:text-gray-600 text-gray-900 bg-gray-500 outline-none py-2 w-full" placeholder="nombre" />
           </div>
 

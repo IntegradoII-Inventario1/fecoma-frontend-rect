@@ -15,3 +15,11 @@ export const uiCloseModalVenta = () => ({type:types.uiCloseModalVentas})
 //MODAL EMPLEADO
 export const uiOpenModalEmpleado = () => ({type:types.uiOpenModalEmpleado})
 export const uiCloseModalEmpleado = () => ({type:types.uiCloseModalEmpleado})
+
+//MODAL Categoria
+export const uiOpenModalCategoria = () => ({type:types.uiOpenModalCategoria})
+export const uiCloseModalCategoria = () => ({type:types.uiCloseModalCategoria})
+
+//MODAL Puesto
+export const uiOpenModalPuesto = () => ({type:types.uiOpenModalPuesto})
+export const uiCloseModalPuesto = () => ({type:types.uiCloseModalPuesto})
