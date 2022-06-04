@@ -1,7 +1,12 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { GoPerson } from "react-icons/go";
+import {startLogin} from '../../redux/actions/auth'
 import {FaUnlockAlt} from 'react-icons/fa'
 const LoginScreen = () => {
+
+  const dispatch = useDispatch()
+
   const [loginForm, setLoginForm] = useState({
     usuario: "",
     password: "",
@@ -15,9 +20,9 @@ const LoginScreen = () => {
     });
   };
 
-  const handleCrear = (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    console.log(loginForm);
+    dispatch(startLogin(usuario,password))
   };
 
   return (
@@ -26,7 +31,7 @@ const LoginScreen = () => {
         <h1 className="text-center text-gray-600 dark:text-gray-200 my-10 text-4xl font-semibold">
           Inicia Sesión
         </h1>
-        <form onSubmit={handleCrear} className="px-10 flex flex-col gap-y-12">
+        <form onSubmit={handleLogin} className="px-10 flex flex-col gap-y-12">
           <div className="flex flex-col">
             <label form="usuario" className="dark:text-gray-200">
               Usuario
@@ -34,7 +39,7 @@ const LoginScreen = () => {
 
             <div className="flex items-center bg-blue-50 dark:bg-gray-600 p-2 rounded-sm border-b-2 border-gray-500">
               {/*rounded redondeo de esq */}
-              <GoPerson size={25} color="#46A7FF"/>
+              <GoPerson size={25} className="text-primary"/>
               <input
                 className="bg-transparent p-2 outline-none w-full dark:text-gray-200"
                 value={usuario}
@@ -50,7 +55,7 @@ const LoginScreen = () => {
           <div className="flex flex-col">
             <label form="password" className="dark:text-gray-200">Contraseña</label>
             <div className="flex items-center bg-blue-50 dark:bg-gray-600 p-2 rounded-sm border-b-2 border-gray-500">
-            <FaUnlockAlt size={25} color="#46A7FF"/>
+            <FaUnlockAlt size={25} className="text-primary"/>
             <input className="bg-transparent p-2 outline-none w-full dark:text-gray-200"
               value={password}
               onChange={handleInputChange}
@@ -61,7 +66,7 @@ const LoginScreen = () => {
             </div>
           </div>
 
-          <button type="submit" className="p-3 bg-blue-800 rounded-2xl border-b-2 border-gray-500 text-white">Ingresar</button>
+          <button type="submit" className="p-3 bg-primary rounded-2xl border-b-2 border-gray-500 text-white active:scale-95 ease-out duration-300 text-lg font-bold">Ingresar</button>
         </form>
       </div>
     </div>

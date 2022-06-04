@@ -1,6 +1,7 @@
 import HeadComponent from "../../components/HeadComponent";
 import { FaTrash } from "react-icons/fa";
 import { BsPenFill } from "react-icons/bs";
+import {CgExtensionAdd} from 'react-icons/cg'
 import IngresoModal from "../../components/modals/IngresoModal";
 import { useDispatch } from "react-redux";
 import { uiOnpenModalIngreso } from "../../redux/actions/ui";
@@ -15,14 +16,15 @@ const IngresosScreen = () => {
     <>
       <HeadComponent titulo="Ingresos" />
       <div className="dark:text-gray-300 flex flex-col">
-        <div>
-          <button
-            onClick={abrirModal}
-            className="bg-green-600 dark:bg-opacity-70 mb-10 text-white dark:text-gray-300 p-2 font-semibold rounded-lg active:scale-95 hover:bg-green-500 cursor-pointer"
-          >
-            Ingresar nuevo producto
-          </button>
-        </div>
+      <div className="flex justify-between p-1 items-center  w-full md:w-fit">
+            <button
+              onClick={abrirModal}
+              className=" flex justify-center items-center gap-x-2  w-full bg-blue-600 dark:bg-opacity-70 md:mb-10  text-white dark:text-gray-300 p-2 font-semibold rounded-lg active:scale-95 hover:bg-blue-500 cursor-pointer outline-none"
+            >
+              <CgExtensionAdd size={25} />
+              Producto
+            </button>
+          </div>
 
         <IngresoModal />
 
@@ -80,7 +82,7 @@ const IngresosScreen = () => {
                   Maquinaria
                 </td>
                 <td className="p-3 text-sm flex gap-x-2 text-white dark:text-gray-300 whitespace-nowrap">
-                  <button className="p-2 active:scale-95 bg-yellow-400 dark:bg-opacity-70 rounded-lg">
+                  <button className="p-2 active:scale-95 bg-primary bg-opacity-80 dark:bg-opacity-70 rounded-lg">
                     <BsPenFill />
                   </button>
                   <button className="p-2 active:scale-95 bg-red-400 dark:bg-opacity-70 rounded-lg">

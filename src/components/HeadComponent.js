@@ -12,7 +12,7 @@ const HeadComponent = ({titulo="Sin titulo"}) => {
           <TimeClock />
         </h1>
       </header>
-      <hr className="border-gray-200 dark:border-gray-700" />
+      <hr className="border-gray-400 dark:border-gray-700" />
 
     </>
   )

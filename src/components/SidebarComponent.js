@@ -39,8 +39,8 @@ const activeMenu = () => {
   return (
     <>
     
-    <div className='hidden md:flex flex-col h-screen max-h-screen gap-y-4 items-center py-8 w-14 lg:w-20 bg-white dark:bg-gray-900'>
-        <button className='p-2 bg-opacity-20 rounded-xl bg-primary text-orange-500'
+    <div className='hidden md:flex flex-col h-screen max-h-screen gap-y-4 items-center py-8 w-14 lg:w-20 bg-slate-50 dark:bg-gray-900'>
+        <button className='p-2 bg-opacity-30 rounded-xl bg-primary text-primary'
         >
             <FaStore size={30}/>
         </button>
@@ -50,7 +50,7 @@ const activeMenu = () => {
                     <Link to={icon.route}>
                         <button
                         onClick={() => selectIcon(icon.name)}
-                        className={`${name === icon.name ? "text-white shadow-primary bg-primary":"text-orange-600"} p-2 lg:p-4 my-4 mr-2  lg:mr-4 ml-5 lg:ml-3 rounded-xl `}>
+                        className={`${name === icon.name ? "text-white shadow-primary bg-primary":"text-primary"} p-2 lg:p-4 my-4 mr-2  lg:mr-4 ml-5 lg:ml-3 rounded-xl `}>
                             <icon.icon size={20}/>
                         </button>
                     </Link>
@@ -58,7 +58,7 @@ const activeMenu = () => {
             ))}
 
             <button onClick={switch_toggle} className={`${darkMode?"bg-white":"bg-primary"} ml-2 lg:-ml-1 w-12 lg:w-16  h-full  rounded-2xl flex items-center transition duration-300 focus:outline-none shadow`}>
-                <div className={`${darkMode?"bg-gray-800 translate-x-3 lg:translate-x-full ml-2":"bg-orange-600 translate-x-1 w-7"} h-7 relative rounded-full transition duration-500 transform p-[0.20rem] text-white flex justify-center items-center`}>
+                <div className={`${darkMode?"bg-gray-800 translate-x-3 lg:translate-x-full ml-2":"bg-prtext-primary translate-x-1 w-7"} h-7 relative rounded-full transition duration-500 transform p-[0.20rem] text-white flex justify-center items-center`}>
                     {
                         darkMode ?  <FaMoon size={20}/> : <FaSun size={20}/>
                     }

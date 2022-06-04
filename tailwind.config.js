@@ -17,7 +17,7 @@ module.exports = {
           800: '#252836',
           900: '#1F1D2B',
         },
-        primary: '#EB966A',
+        primary: '#0671F9',
         accent:{
           blue:'#65b0f6',
           orange:'#ffb572',
@@ -27,7 +27,7 @@ module.exports = {
         }
       },
       boxShadow:{
-        primary: '4px 2px 14px rgba(255,255,255,0.3)',
+        primary: '4px 2px 14px #0671F9',
         'inverse-top' : '4px 4px 0 rgb(229 231 235)',
         'inverse-top-dark' : '4px 4px 0 #252836',
         'inverse-bottom' : '4px -4px 0 rgb(229 231 235)',

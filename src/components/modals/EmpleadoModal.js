@@ -71,7 +71,7 @@ const EmpleadoModal = () => {
           <div className="flex flex-col py-2">
             <label>Nombres</label>
             <div className="flex items-center bg-blue-50  p-2 rounded-sm border-b-2 border-gray-500 dark:border-gray-200  dark:text-gray-900 dark:bg-gray-500" >
-              <BiRename size={25} items-center color="#46A7FF" />
+              <BiRename size={25} items-center className="text-primary" />
               <input
                 onChange={handleInputChange}
                 name="nombres"
@@ -85,7 +85,7 @@ const EmpleadoModal = () => {
           <div className="flex flex-col py-2">
             <label>Apellidos</label>
             <div className="flex items-center bg-blue-50  p-2 rounded-sm border-b-2 border-gray-500 dark:border-gray-200  dark:text-gray-900 dark:bg-gray-500">
-              <BiRename size={25} items-center color="#46A7FF" />
+              <BiRename size={25} items-center className="text-primary" />
               <input
                 onChange={handleInputChange}
                 name="apellidos"
@@ -99,7 +99,7 @@ const EmpleadoModal = () => {
           <div className="flex flex-col py-2">
             <label>DNI</label>
             <div className="flex items-center bg-blue-50  p-2 rounded-sm border-b-2 border-gray-500 dark:border-gray-200  dark:text-gray-900 dark:bg-gray-500">
-              <RiPassportFill size={25} items-center color="#46A7FF" />
+              <RiPassportFill size={25} items-center className="text-primary" />
               <input
                 onChange={handleInputChange}
                 name="dni"
@@ -113,7 +113,7 @@ const EmpleadoModal = () => {
           <div className="flex flex-col py-2">
             <label>Dirección</label>
             <div className="flex items-center bg-blue-50  p-2 rounded-sm border-b-2 border-gray-500 dark:border-gray-200  dark:text-gray-900 dark:bg-gray-500">
-              <FaDirections size={25} items-center color="#46A7FF" />
+              <FaDirections size={25} items-center className="text-primary" />
               <input
                 onChange={handleInputChange}
                 name="direccion"
@@ -127,7 +127,7 @@ const EmpleadoModal = () => {
           <div className="flex flex-col py-2">
             <label>Teléfono</label>
             <div className="flex items-center bg-blue-50  p-2 rounded-sm border-b-2 border-gray-500 dark:border-gray-200  dark:text-gray-900 dark:bg-gray-500">
-              <FaPhoneAlt size={25} items-center color="#46A7FF" />
+              <FaPhoneAlt size={25} items-center className="text-primary" />
               <input
                 type="text"
                 className="bg-transparent p-2 outline-none w-full dark:text-gray-200 dark:placeholder:text-gray-600"
@@ -143,7 +143,7 @@ const EmpleadoModal = () => {
           <div className="flex flex-col py-2">
             <label>Correo</label>
             <div className="flex items-center bg-blue-50  p-2 rounded-sm border-b-2 border-gray-500 dark:border-gray-200  dark:text-gray-900 dark:bg-gray-500">
-              <AiOutlineMail size={25} items-center color="#46A7FF" />
+              <AiOutlineMail size={25} items-center className="text-primary" />
               <input
                 type="text"
                 className="bg-transparent p-2 outline-none w-full dark:text-gray-200 dark:placeholder:text-gray-600"
