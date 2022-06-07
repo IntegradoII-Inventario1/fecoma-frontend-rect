@@ -4,6 +4,7 @@ import AppRoute from "./routes/AppRoute";
 import { Provider } from "react-redux";
 import { store } from "./redux/store/store";
 
+
 function App() {
   const html = document.querySelector("html");
   const local = JSON.parse(localStorage.getItem("isDarkMode"));
@@ -16,11 +17,15 @@ function App() {
     }
   }, [local, html.classList]);
 
+
+
   return (
     <Provider store={store}>
-      <div className="overflow-hidden">
-        <AppRoute />
-      </div>
+
+        <div className="overflow-hidden">
+          <AppRoute />
+        </div>
+
     </Provider>
   );
 }

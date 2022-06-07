@@ -7,6 +7,8 @@ const initialState = {
   modalEmpleadoOpen: false,
   modalCategoriaOpen: false,
   modalPuestoOpen: false,
+  loading:false,
+  smsError:null
 };
 
 export const uiReducer = (state = initialState, action) => {
@@ -78,6 +80,18 @@ export const uiReducer = (state = initialState, action) => {
         ...state,
         modalPuestoOpen: false,
       };
+
+    case types.uiStartLoading:
+      return{
+        ...state,
+        loading: true
+      }
+
+    case types.uiFinishLoading:
+      return{
+        ...state,
+        loading: false
+      }
 
     default:
       return state;

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { GoPerson } from "react-icons/go";
 import {startLogin} from '../../redux/actions/auth'
 import {FaUnlockAlt} from 'react-icons/fa'
 const LoginScreen = () => {
 
   const dispatch = useDispatch()
+  const {loading} = useSelector(state => state.ui)
 
   const [loginForm, setLoginForm] = useState({
     usuario: "",
@@ -66,7 +67,7 @@ const LoginScreen = () => {
             </div>
           </div>
 
-          <button type="submit" className="p-3 bg-primary rounded-2xl border-b-2 border-gray-500 text-white active:scale-95 ease-out duration-300 text-lg font-bold">Ingresar</button>
+          <button disabled={loading} type="submit" className={`${loading ? "bg-opacity-20":""} p-3 bg-primary rounded-2xl border-b-2 border-gray-500 text-white active:scale-95 ease-out duration-300 text-lg font-bold`}>Ingresar</button>
         </form>
       </div>
     </div>

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Modal from "react-modal";
 import { BiRename } from "react-icons/bi";
 import { FaDirections } from "react-icons/fa";
@@ -8,51 +7,83 @@ import { RiPassportFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { uiCloseModalEmpleado } from "../../redux/actions/ui";
+import { startRegister } from "../../redux/actions/auth";
+import { useForm } from "../../hooks/useForm";
+
 
 const EmpleadoModal = () => {
+  const { active: empleado } = useSelector((state) => state.empleados);
+
   const dispatch = useDispatch();
 
   const { modalEmpleadoOpen } = useSelector((state) => state.ui);
 
-  const [formValues, setFormValues] = useState({
-    nombres: "",
-    apellidos: "",
-    dni: "",
+
+  const [formValues, handleInputChange, reset] = useForm(empleado || {
+    nombre: "",
+    apellido: "",
     direccion: "",
+    dni: "",
     telefono: "",
     correo: "",
-    puesto: "",
+    username: "",
+    password: "",
+    password2: "",
   });
 
-  const { nombres, apellidos, dni, direccion, telefono, correo, puesto } =
-    formValues;
+  const {
+    nombre,
+    apellido,
+    direccion,
+    dni,
+    telefono,
+    correo,
+    username,
+    password,
+    password2,
+  } = formValues;
 
-  const handleInputChange = ({ target }) => {
-    setFormValues({
-      ...formValues,
-      [target.name]: target.value,
-    });
-  };
-
-  const handleSubmitForm = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
     if (
-      nombres.trim().length < 1 ||
-      apellidos.trim().length < 1 ||
-      dni.trim().length < 1 ||
+      nombre.trim().length < 1 ||
+      apellido.trim().length < 1 ||
       direccion.trim().length < 1 ||
+      dni.trim().length < 1 ||
       telefono.trim().length < 1 ||
       correo.trim().length < 1 ||
-      puesto.trim().length < 1
+      username.trim().length < 1 ||
+      password.trim().length < 1 ||
+      password2.trim().length < 1
     ) {
-      return Swal.fire("error,error,error");
+      return Swal.fire(
+        "error",
+        "Los campos son necesarios y no pueden ser vacios",
+        "error"
+      );
+    } else if (password !== password2) {
+      return Swal.fire("Error", "Las contraseñas deben ser iguales", "error");
+    } else {
+      dispatch(
+        startRegister(
+          nombre,
+          apellido,
+          direccion,
+          dni,
+          telefono,
+          correo,
+          username,
+          password
+        )
+      );
     }
+
     closeModal();
-    console.log(formValues);
   };
 
   const closeModal = () => {
     dispatch(uiCloseModalEmpleado());
+    reset();
   };
   return (
     <Modal
@@ -65,17 +96,19 @@ const EmpleadoModal = () => {
       overlayClassName="modal-fondo"
     >
       <div className="max-w-[400px] dark:text-gray-200 w-[270px] h-[500px] max-h-[540px] md:w-[400px] md:h-[540px] p-2">
-        <h1 className="text-2xl font-bold text-center dark:text-white text-gray-600 py-1">Nuevo Empleado</h1>
+        <h1 className="text-2xl font-bold text-center dark:text-white text-gray-600 py-1">
+          Nuevo Empleado
+        </h1>
         <hr className="border-gray-500 py-2" />
-        <form onSubmit={handleSubmitForm} className="container">
+        <form onSubmit={handleRegister} className="container">
           <div className="flex flex-col py-2">
             <label>Nombres</label>
-            <div className="flex items-center bg-blue-50  p-2 rounded-sm border-b-2 border-gray-500 dark:border-gray-200  dark:text-gray-900 dark:bg-gray-500" >
+            <div className="flex items-center bg-blue-50  p-2 rounded-sm border-b-2 border-gray-500 dark:border-gray-200  dark:text-gray-900 dark:bg-gray-500">
               <BiRename size={25} items-center className="text-primary" />
               <input
                 onChange={handleInputChange}
-                name="nombres"
-                value={nombres}
+                name="nombre"
+                value={nombre}
                 className="bg-transparent p-2 outline-none w-full dark:placeholder:text-gray-600"
                 placeholder="Ingrese nombres"
               />
@@ -88,24 +121,10 @@ const EmpleadoModal = () => {
               <BiRename size={25} items-center className="text-primary" />
               <input
                 onChange={handleInputChange}
-                name="apellidos"
-                value={apellidos}
+                name="apellido"
+                value={apellido}
                 className="bg-transparent p-2 outline-none w-full dark:text-gray-200 dark:placeholder:text-gray-600"
                 placeholder="Ingrese apellidos"
-              />
-            </div>
-          </div>
-
-          <div className="flex flex-col py-2">
-            <label>DNI</label>
-            <div className="flex items-center bg-blue-50  p-2 rounded-sm border-b-2 border-gray-500 dark:border-gray-200  dark:text-gray-900 dark:bg-gray-500">
-              <RiPassportFill size={25} items-center className="text-primary" />
-              <input
-                onChange={handleInputChange}
-                name="dni"
-                value={dni}
-                className="bg-transparent p-2 outline-none w-full dark:text-gray-200 dark:placeholder:text-gray-600"
-                placeholder="Ingrese DNI"
               />
             </div>
           </div>
@@ -120,6 +139,20 @@ const EmpleadoModal = () => {
                 value={direccion}
                 className="bg-transparent p-2 outline-none w-full dark:text-gray-200 dark:placeholder:text-gray-600"
                 placeholder="Ingrese dirección"
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col py-2">
+            <label>DNI</label>
+            <div className="flex items-center bg-blue-50  p-2 rounded-sm border-b-2 border-gray-500 dark:border-gray-200  dark:text-gray-900 dark:bg-gray-500">
+              <RiPassportFill size={25} items-center className="text-primary" />
+              <input
+                onChange={handleInputChange}
+                name="dni"
+                value={dni}
+                className="bg-transparent p-2 outline-none w-full dark:text-gray-200 dark:placeholder:text-gray-600"
+                placeholder="Ingrese DNI"
               />
             </div>
           </div>
@@ -152,6 +185,50 @@ const EmpleadoModal = () => {
                 onChange={handleInputChange}
                 name="correo"
               ></input>
+            </div>
+          </div>
+
+          <div className="flex flex-col py-2">
+            <label>Username</label>
+            <div className="flex items-center bg-blue-50  p-2 rounded-sm border-b-2 border-gray-500 dark:border-gray-200  dark:text-gray-900 dark:bg-gray-500">
+              <BiRename size={25} items-center className="text-primary" />
+              <input
+                onChange={handleInputChange}
+                name="username"
+                value={username}
+                className="bg-transparent p-2 outline-none w-full dark:placeholder:text-gray-600"
+                placeholder="Ingrese username"
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col py-2">
+            <label>Password</label>
+            <div className="flex items-center bg-blue-50  p-2 rounded-sm border-b-2 border-gray-500 dark:border-gray-200  dark:text-gray-900 dark:bg-gray-500">
+              <BiRename size={25} items-center className="text-primary" />
+              <input
+                onChange={handleInputChange}
+                name="password"
+                value={password}
+                type="password"
+                className="bg-transparent p-2 outline-none w-full dark:placeholder:text-gray-600"
+                placeholder="Ingrese contraseña"
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col py-2">
+            <label>Repeat password</label>
+            <div className="flex items-center bg-blue-50  p-2 rounded-sm border-b-2 border-gray-500 dark:border-gray-200  dark:text-gray-900 dark:bg-gray-500">
+              <BiRename size={25} items-center className="text-primary" />
+              <input
+                onChange={handleInputChange}
+                name="password2"
+                value={password2}
+                type="password"
+                className="bg-transparent p-2 outline-none w-full dark:placeholder:text-gray-600"
+                placeholder="Ingrese contraseña"
+              />
             </div>
           </div>
 

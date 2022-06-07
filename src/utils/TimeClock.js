@@ -7,7 +7,7 @@ const TimeClock = () => {
     const [time, setTime] = useState('')
 
     setInterval(() => {
-      setTime(moment().format('dddd Do MMMM YYYY, h:mm:ss a'));
+      setTime(moment().format('dddd DD MMMM YYYY, h:mm:ss a'));
     }, 1000);
 
    return (

@@ -9,7 +9,9 @@ import CategoriaModal from '../../components/modals/CategoriaModal';
 import PuestoModal from '../../components/modals/PuestoModal';
 import { useDispatch } from "react-redux";
 import { uiOpenModalCategoria, uiOpenModalEmpleado, uiOpenModalPuesto } from "../../redux/actions/ui";
+import TableCompenet from "../../components/TableCompenet";
 const AdminScreen = () => {
+
   const dispatch = useDispatch();
 
   const abrirModal = () => {
@@ -21,6 +23,7 @@ const AdminScreen = () => {
   const abrirModal2 = () => {
     dispatch(uiOpenModalPuesto());
   };
+
   return (
     <>
       <HeadComponent titulo="Administración" />
@@ -61,9 +64,9 @@ const AdminScreen = () => {
           <PuestoModal></PuestoModal>
 
         </div>
-        <hr className="border-gray-400 dark:border-gray-700"/>
+        <hr className="hidden border-gray-400 mb-4 dark:border-gray-700"/>
 
-        <div className="overflow-auto w-full h-[480px] rounded-lg shadow mb-2">
+        <div className="hidden overflow-auto w-full h-[480px] rounded-lg shadow mb-2">
           <table className="w-full shadow-inner shadow-gray-400">
             <thead className="dark:bg-gray-900 bg-white border-b-2 border-gray-300 dark:border-gray-700">
               <tr>
@@ -128,7 +131,7 @@ const AdminScreen = () => {
             </tbody>
           </table>
         </div>
-        <div className="flex rounded-md p-1 justify-end gap-1 bg-white dark:bg-gray-900 text-sm font-semibold tracking-wide">
+        <div className="hidden rounded-md p-1 justify-end gap-1 bg-white dark:bg-gray-900 text-sm font-semibold tracking-wide">
           <button className="p-1 w-6 font-semibold bg-gray-400 bg-opacity-70 rounded-lg">
             1
           </button>
@@ -147,6 +150,9 @@ const AdminScreen = () => {
           <hr className="border-gray-400 dark:border-gray-700"/>
         </div>
 
+        <hr className="border-gray-400 mb-4 dark:border-gray-700"/>
+
+        <TableCompenet />
         
 
         

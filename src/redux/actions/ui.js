@@ -23,3 +23,12 @@ export const uiCloseModalCategoria = () => ({type:types.uiCloseModalCategoria})
 //MODAL Puesto
 export const uiOpenModalPuesto = () => ({type:types.uiOpenModalPuesto})
 export const uiCloseModalPuesto = () => ({type:types.uiCloseModalPuesto})
+
+export const startLoading = () => ({
+  type: types.uiStartLoading
+})
+
+export const finishLoading = () => ({
+  type: types.uiFinishLoading
+})
+
