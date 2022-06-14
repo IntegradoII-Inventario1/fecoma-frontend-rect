@@ -54,7 +54,7 @@ const CategoriaModal = () => {
           <div className="flex flex-col py-2">
             <label>Nombre</label>
             <div className="flex items-center bg-blue-50  p-2 rounded-sm border-b-2 border-gray-500 dark:border-gray-200  dark:text-gray-900 dark:bg-gray-500">
-              <BiRename size={25} items-center className="text-primary" />
+              <BiRename size={25} className="text-primary" />
               <input
                 onChange={handleInputChange}
                 name="nombre"
@@ -68,7 +68,7 @@ const CategoriaModal = () => {
           <div className="flex flex-col py-2">
             <label>Descripcion</label>
             <div className="flex items-center bg-blue-50  p-2 rounded-sm border-b-2 border-gray-500 dark:border-gray-200  dark:text-gray-900 dark:bg-gray-500">
-              <MdOutlineDescription size={25} items-center className="text-primary" />
+              <MdOutlineDescription size={25} className="text-primary" />
               <textarea
                 type="text"
                 onChange={handleInputChange}

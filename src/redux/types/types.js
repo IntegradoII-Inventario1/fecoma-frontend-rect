@@ -9,6 +9,8 @@ export const types = {
   uiCloseModalVentas:'[ui] Close modal venta',
   uiOpenModalEmpleado:'[ui] Open modal empleado',
   uiCloseModalEmpleado:'[ui] Close modal empleado',
+  uiOpenModalNewEmpleado:'[ui] Open modal new empleado',
+  uiCloseModalNewEmpleado:'[ui] Close modal new empleado',
   uiOpenModalPuesto:'[ui] Open modal puesto',
   uiCloseModalPuesto:'[ui] Close modal puesto',
   uiOpenModalCategoria:'[ui] Open modal categoria',

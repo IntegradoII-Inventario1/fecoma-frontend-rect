@@ -1,14 +1,7 @@
+import Swal from "sweetalert2";
 import { fetchConToken } from "../../utils/fetch";
 import { types } from "../types/types";
 
-
-export const getEmpleado = (id) => {
-  return async(dispatch) => {
-    const resp = await fetchConToken(`api/v1/empleado/${id}`)
-    const body = await resp.json();
-    console.log(body);
-  }
-}
 
 export const getAllEmpleados = () => {
   return async(dispatch) => {
@@ -19,6 +12,7 @@ export const getAllEmpleados = () => {
     dispatch(setEmpleados(empleados))
   }
 }
+
 
 export const setEmpleados = (empleados) => ({
   type: types.empleadoLoad,
@@ -37,3 +31,30 @@ export const activeEmpleado = (id,empleado) => ({
     ...empleado
   }
 })
+
+
+export const startUpdateEmpleado = (id,nombre, apellido, direccion,dni, telefono, correo, username, password) => {
+  return async(dispatch) => {
+    const resp = await fetchConToken(`api/v1/empleado/edit/${id}`,{
+      nombre, apellido, direccion,dni, telefono, correo, username, password
+    },'PUT')
+    const body = await resp.json();
+    Swal.fire("Empleado Actualizado","Empleado Actualizado con exito","success");
+    console.log(body);
+    dispatch(getAllEmpleados())
+  }
+}
+
+export const deleteEmpleado = (id) => {
+  return async(dispatch) => {
+    try {
+      await fetchConToken(`api/v1/empleado/eliminar/${id}`,{},'DELETE')
+      Swal.fire("Empleado Eliminado","El empleado se elimino con exito","success");
+      dispatch(getAllEmpleados())
+    } catch (error) {
+      console.log(error);
+    }
+    
+  }
+}
+

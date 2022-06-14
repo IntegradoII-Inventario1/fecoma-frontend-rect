@@ -1,38 +1,31 @@
 import { types } from "../types/types"
 
 const initialState = {
-  empleados:[],
+  categorias:[],
   active:{
     id: null,
     nombre:"",
-    apellido:"",
-    direccion:"",
-    dni:"",
-    telefono:"",
-    correo:"",
-    username:"",
-    password:"",
-    password2:""
+    descripcion:"",
   }
 }
 
-export const empleadoReducer = (state = initialState, action) => {
+export const categoriaReducer = (state = initialState, action) => {
   switch (action.type) {
 
-    case types.empleadoActive:
+    case types.categoriaActive:
       return{
         ...state,
         active:{
           ...action.payload
         }
       }
-    case types.empleadoLoad:
+    case types.categoriaLoad:
       return{
         ...state,
-        empleados: [...action.payload]
+        categorias: [...action.payload]
       }
     
-    case types.empleadoClean:
+    case types.categoriaClean:
       return{
         ...state,
         active: initialState

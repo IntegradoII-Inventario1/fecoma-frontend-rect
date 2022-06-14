@@ -1,17 +1,17 @@
 import { FaTrash } from "react-icons/fa";
 import { BsPenFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
-import { activeEmpleado, deleteEmpleado } from "../redux/actions/empleado";
-import { uiOpenModalEmpleado } from "../redux/actions/ui";
+import { uiOnpenModalUpdateIngreso } from "../redux/actions/ui";
+import { activeProducto } from "../redux/actions/ingreso";
 
-const TableUtil = ({id,nombre,apellido,direccion,dni,telefono,correo,username}) => {
+const TableIngresosUtil = ({id,nombre,descripcion,costo,cantidad,proveedor,categoria}) => {
 
   const dispatch = useDispatch()
 
   const obtener = async () => {
-    dispatch(uiOpenModalEmpleado());
-    await dispatch(activeEmpleado(id,{
-      nombre,apellido,direccion,dni,telefono,correo,username
+    dispatch(uiOnpenModalUpdateIngreso());
+    await dispatch(activeProducto(id,{
+      nombre,descripcion,costo,cantidad,proveedor,categoria
     }))
   }
 
@@ -25,25 +25,19 @@ const TableUtil = ({id,nombre,apellido,direccion,dni,telefono,correo,username}) 
         {nombre}
       </td>
       <td className="p-3 text-sm dark:text-gray-300 whitespace-nowrap">
-        {apellido}
+        {descripcion}
       </td>
       <td className="p-3 text-sm dark:text-gray-300 whitespace-nowrap">
-        {direccion}
+        {costo}
       </td>
       <td className="p-3 text-sm dark:text-gray-300 whitespace-nowrap">
-        {dni}
+        {cantidad}
       </td>
-      <td className="p-3 text-sm dark:text-gray-300 whitespace-nowrap">
-        {telefono}
+      <td className="p-3 text-sm dark:text-green-300 cursor-pointer active:scale-95 whitespace-nowrap">
+        {!!proveedor ? proveedor : "no asignado"}
       </td>
-      <td className="p-3 text-sm dark:text-gray-300 whitespace-nowrap">
-        {correo}
-      </td>
-      <td className="p-3 text-sm dark:text-gray-300 whitespace-nowrap">
-        {username}
-      </td>
-      <td className="p-3 text-sm dark:text-gray-300 whitespace-nowrap">
-        *******
+      <td className="p-3 text-sm dark:text-green-300 cursor-pointer active:scale-95 whitespace-nowrap">
+        {!!categoria ? categoria : "no asignado"}
       </td>
 
       <td className="p-3 text-sm flex gap-x-2 text-white dark:text-gray-300 whitespace-nowrap">
@@ -61,4 +55,4 @@ const TableUtil = ({id,nombre,apellido,direccion,dni,telefono,correo,username}) 
   );
 };
 
-export default TableUtil;
+export default TableIngresosUtil;

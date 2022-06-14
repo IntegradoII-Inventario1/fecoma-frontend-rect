@@ -2,15 +2,21 @@ import {types} from '../types/types'
 import {fetchConToken, fetchForAuth} from '../../utils/fetch'
 import Swal from 'sweetalert2'
 import { finishLoading, startLoading } from './ui'
+import { getAllEmpleados } from './empleado'
 
 
 export const startRegister = (nombre, apellido, direccion,dni, telefono, correo, username, password) => {
-  return async() => {
-    const resp = await fetchConToken('api/v1/empleado/crear',{
-      nombre, apellido, direccion,dni, telefono, correo, username, password
-    },'POST')
-    const body = await resp.json();
-    Swal.fire('Empleado Creado',body.mensaje,'success')
+  return async(dispatch) => {
+    try {
+      const resp = await fetchConToken('api/v1/empleado/crear',{
+        nombre, apellido, direccion,dni, telefono, correo, username, password
+      },'POST')
+      const body = await resp.json();
+      Swal.fire('Empleado Creado',body.mensaje,'success')
+      dispatch(getAllEmpleados())
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
 

@@ -5,6 +5,7 @@ const initialState = {
   modalProvedorOpen: false,
   modalVentaOpen: false,
   modalEmpleadoOpen: false,
+  modalNewEmpleadoOpen: false,
   modalCategoriaOpen: false,
   modalPuestoOpen: false,
   loading:false,
@@ -92,6 +93,19 @@ export const uiReducer = (state = initialState, action) => {
         ...state,
         loading: false
       }
+    
+    case types.uiOpenModalNewEmpleado:
+      return{
+        ...state,
+        modalNewEmpleadoOpen: true
+      }
+
+    case types.uiCloseModalNewEmpleado:
+      return{
+        ...state,
+        modalNewEmpleadoOpen:false
+      }
+    
 
     default:
       return state;

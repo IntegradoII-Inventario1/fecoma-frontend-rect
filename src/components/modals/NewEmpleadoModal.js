@@ -1,4 +1,4 @@
-import Modal from "react-modal";
+import React from 'react'
 import { BiRename } from "react-icons/bi";
 import { FaDirections } from "react-icons/fa";
 import { FaPhoneAlt } from "react-icons/fa";
@@ -6,34 +6,29 @@ import { AiOutlineMail } from "react-icons/ai";
 import { RiPassportFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import { uiCloseModalEmpleado } from "../../redux/actions/ui";
+import { uiCloseModalNewEmpleado } from "../../redux/actions/ui";
+import { startRegister } from "../../redux/actions/auth";
 import { useForm } from "../../hooks/useForm";
-import { useEffect, useRef } from "react";
-import { activeEmpleado, startUpdateEmpleado } from "../../redux/actions/empleado";
+import Modal from "react-modal/lib/components/Modal";
 
-
-const EmpleadoModal = () => {
-  const { active: empleado } = useSelector((state) => state.empleados);
+const NewEmpleadoModal = () => {
   const dispatch = useDispatch();
 
-  const { modalEmpleadoOpen } = useSelector((state) => state.ui);
-  const [formValues, handleInputChange, reset] = useForm(empleado);
+  const { modalNewEmpleadoOpen } = useSelector((state) => state.ui);
+
+  const [formValues, handleInputChange] = useForm({
+    id: null,
+    nombre:"",
+    apellido:"",
+    direccion:"",
+    dni:"",
+    telefono:"",
+    correo:"",
+    username:"",
+    password:"",
+    password2:""
+  });
   const {nombre,apellido,direccion,dni,telefono,correo,username,password,password2,} = formValues;
-
-  const activeId = useRef(empleado.id);
-
-  useEffect(() => {
-    if(empleado.id !== activeId.current){
-      reset(empleado)
-      activeId.current = empleado.id
-    }
-  }, [empleado,reset])
-
-  useEffect(() => {
-    dispatch(activeEmpleado(formValues.id,{...formValues}))
-  }, [formValues,dispatch])
-  
-
   const handleRegister = (e) => {
     e.preventDefault();
     if (
@@ -43,7 +38,9 @@ const EmpleadoModal = () => {
       dni.trim().length < 1 ||
       telefono.trim().length < 1 ||
       correo.trim().length < 1 ||
-      username.trim().length < 1 
+      username.trim().length < 1 ||
+      password.trim().length < 1 ||
+      password2.trim().length < 1
     ) {
       return Swal.fire(
         "error",
@@ -53,17 +50,19 @@ const EmpleadoModal = () => {
     } else if (password !== password2) {
       return Swal.fire("Error", "Las contraseñas deben ser iguales", "error");
     } else {
-      
-        dispatch(startUpdateEmpleado(
-          empleado.id,
-          nombre,
-          apellido,
-          direccion,
-          dni,
-          telefono,
-          correo,
-          username,
-          password))
+     
+        dispatch(
+          startRegister(
+            nombre,
+            apellido,
+            direccion,
+            dni,
+            telefono,
+            correo,
+            username,
+            password
+          )
+        ); 
       
     }
 
@@ -71,21 +70,12 @@ const EmpleadoModal = () => {
   };
 
   const closeModal = () => {
-    dispatch(uiCloseModalEmpleado());
-    reset({
-      id: null,
-      nombre:"",
-      apellido:"",
-      direccion:"",
-      dni:"",
-      telefono:"",
-      correo:"",
-      username:"",
-    });
+    dispatch(uiCloseModalNewEmpleado());
   };
+
   return (
     <Modal
-      isOpen={modalEmpleadoOpen}
+      isOpen={modalNewEmpleadoOpen}
       //onAfterOpen={afterOpenModal}
       onRequestClose={closeModal}
       style={customStyles}
@@ -200,7 +190,7 @@ const EmpleadoModal = () => {
             </div>
           </div>
 
-          {/*<div className="flex flex-col py-2">
+          <div className="flex flex-col py-2">
             <label>Password</label>
             <div className="flex items-center bg-blue-50  p-2 rounded-sm border-b-2 border-gray-500 dark:border-gray-200  dark:text-gray-900 dark:bg-gray-500">
               <BiRename size={25} className="text-primary" />
@@ -228,7 +218,7 @@ const EmpleadoModal = () => {
                 placeholder="Ingrese contraseña"
               />
             </div>
-          </div>*/}
+          </div>
 
           <div className="flex flex-col py-4">
             <button
@@ -236,15 +226,16 @@ const EmpleadoModal = () => {
               className="w-full text-center rounded-md bg-blue-600 text-gray-200 p-3 py-3"
             >
               <i className="far fa-save"></i>
-              <span> Actualizar</span>
+              <span> Guardar</span>
             </button>
           </div>
         </form>
       </div>
     </Modal>
-  );
-};
-export default EmpleadoModal;
+  )
+}
+
+export default NewEmpleadoModal
 
 const customStyles = {
   content: {

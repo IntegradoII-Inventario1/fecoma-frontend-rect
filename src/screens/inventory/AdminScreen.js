@@ -8,14 +8,16 @@ import EmpleadoModal from '../../components/modals/EmpleadoModal';
 import CategoriaModal from '../../components/modals/CategoriaModal';
 import PuestoModal from '../../components/modals/PuestoModal';
 import { useDispatch } from "react-redux";
-import { uiOpenModalCategoria, uiOpenModalEmpleado, uiOpenModalPuesto } from "../../redux/actions/ui";
+import { uiOpenModalCategoria, uiOpenModalNewEmpleado, uiOpenModalPuesto } from "../../redux/actions/ui";
 import TableCompenet from "../../components/TableCompenet";
+import NewEmpleadoModal from "../../components/modals/NewEmpleadoModal";
+
 const AdminScreen = () => {
 
   const dispatch = useDispatch();
 
   const abrirModal = () => {
-    dispatch(uiOpenModalEmpleado());
+    dispatch(uiOpenModalNewEmpleado());
   };
   const abrirModal1 = () => {
     dispatch(uiOpenModalCategoria());
@@ -34,11 +36,12 @@ const AdminScreen = () => {
               onClick={abrirModal}
               className=" flex justify-center items-center gap-x-2  w-full bg-blue-600 dark:bg-opacity-70 md:mb-10  text-white dark:text-gray-300 p-2 font-semibold rounded-lg active:scale-95 hover:bg-blue-500 cursor-pointer outline-none"
             >
-              <AiOutlineUserAdd size={25} items-center />
+              <AiOutlineUserAdd size={25}/>
               Empleado
             </button>
           </div>
           <EmpleadoModal></EmpleadoModal>
+          <NewEmpleadoModal/>
 
           <div className="flex justify-between p-1 items-center  w-full md:w-fit">
             <button

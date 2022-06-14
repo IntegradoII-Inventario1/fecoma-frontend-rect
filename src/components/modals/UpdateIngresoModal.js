@@ -1,62 +1,89 @@
-import { useState } from "react";
 import Modal from "react-modal";
 import { AiOutlineUserAdd } from "react-icons/ai";
-
-import { FaUsersCog } from "react-icons/fa";
-import { BiCategory } from "react-icons/bi";
 import { MdOutlineDescription } from "react-icons/md";
 import { FaSortNumericUpAlt } from "react-icons/fa";
 import { BsCashCoin } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import { uiCloseModalIngreso } from "../../redux/actions/ui";
+import { uiCloseModalUpdateIngreso } from "../../redux/actions/ui";
+import { useForm } from "../../hooks/useForm";
+import { activeProducto, startUpdateProducto } from "../../redux/actions/ingreso";
+import { useEffect } from "react";
+import { useRef } from "react";
 
-const IngresoModal = () => {
+const UdatateIngresoModal = () => {
+
+  const { active: producto } = useSelector((state) => state.productos);
+  const {categorias} = useSelector(state=> state.categorias)
+
   const dispatch = useDispatch();
 
-  const { modalIngresoOpen } = useSelector((state) => state.ui);
+  const { modalUpdateIngresoOpen } = useSelector((state) => state.ui);
 
-  const [formValues, setFormValues] = useState({
-    nombre: "",
-    descripcion:"",
-    costo: "",
-    cantidad: "",
-    categoria: "",
-    marca: ""
-  });
+  const [formValues, handleInputChange, reset] = useForm(producto);
 
-  const { nombre,descripcion, costo, cantidad, categoria, marca } = formValues;
+  const { nombre,descripcion, costo, cantidad, proveedor ,categoria } = formValues;
 
-  const handleInputChange = ({ target }) => {
-    setFormValues({
-      ...formValues,
-      [target.name]: target.value,
-    });
-  };
+  const activeId = useRef(producto.id); 
+
+  useEffect(() => {
+    if(producto.id !== activeId.current){
+      reset(producto)
+      activeId.current = producto.id
+    }
+  }, [producto,reset])
+
+  useEffect(() => {
+    dispatch(activeProducto(formValues.id,{...formValues}))
+  }, [formValues,dispatch])
+  
+
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
     if (
       nombre.trim().length < 1 ||
       descripcion.trim().length < 1 ||
-      costo.trim().length < 1 ||
-      cantidad.trim().length < 1 ||
-      categoria.trim().length < 1||
-      marca.trim().length < 1 
+      costo < 0 ||
+      cantidad < 0
     ) {
-      return Swal.fire("error", "error", "error");
+      return Swal.fire(
+        "error",
+        "Los campos son necesarios y no pueden ser vacios",
+        "error"
+      );
+    } else{
+        dispatch(
+          startUpdateProducto(
+            nombre,
+            descripcion,
+            costo,
+            cantidad,
+            proveedor,
+            categoria,
+          )
+        ); 
+      
     }
     closeModal();
-    console.log(formValues);
   };
 
   const closeModal = () => {
-    dispatch(uiCloseModalIngreso());
+    dispatch(uiCloseModalUpdateIngreso());
+    reset({
+      id: null,
+      nombre:"",
+      descipcion:"",
+      costo: 0,
+      cantidad: 0,
+      proveedor: null,
+      categoria: null
+    })
   };
 
   return (
     <Modal
-      isOpen={modalIngresoOpen}
+      isOpen={modalUpdateIngresoOpen}
       //onAfterOpen={afterOpenModal}
       onRequestClose={closeModal}
       style={customStyles}
@@ -66,8 +93,7 @@ const IngresoModal = () => {
     >
       <div className="max-w-[400px] dark:text-gray-200 w-[270px] h-[500px] max-h-[540px] md:w-[400px] md:h-[540px] p-2">
         <h1 className="text-2xl font-bold text-center dark:text-white text-gray-600 py-1">
-          {" "}
-          Nuevo producto{" "}
+          Nuevo producto
         </h1>
         <hr className="border-gray-500 py-2" />
         <form onSubmit={handleSubmitForm} className="container">
@@ -131,36 +157,51 @@ const IngresoModal = () => {
             </div>
           </div>
 
+          
+          <div className="flex flex-col py-2">
+            <label>Marca</label>
+            <div className="flex items-center bg-blue-50  p-2 rounded-sm border-b-2 border-gray-500 dark:border-gray-200  dark:text-gray-900 dark:bg-gray-500">
+              <FaSortNumericUpAlt size={25} className="text-primary" />
+              <select
+                 type="text"
+                 onChange={handleInputChange}
+                 name={proveedor}
+                 value={proveedor}
+                 id={proveedor}
+                 className="bg-transparent p-2 outline-none w-full dark:placeholder:text-gray-600"
+              >
+                <option value="proveedor">Proveedor 1</option>
+                <option value="proveedor">Proveedor 2</option>
+                <option value="proveedor">Proveedor 3</option>
+                <option value="proveedor">Proveedor 4</option>
+              </select>
+             
+            </div>
+          </div>
+
 
           <div className="flex flex-col py-2">
             <label>Categoria</label>
             <div className="flex items-center bg-blue-50  p-2 rounded-sm border-b-2 border-gray-500 dark:border-gray-200  dark:text-gray-900 dark:bg-gray-500">
-              <BiCategory size={25} className="text-primary" />
-              <input
-                 
+              <FaSortNumericUpAlt size={25} className="text-primary" />
+              <select
+                 type="text"
                  onChange={handleInputChange}
-                 name="categoria"
+                 name={categoria}
                  value={categoria}
+                 id={categoria}
                  className="bg-transparent p-2 outline-none w-full dark:placeholder:text-gray-600"
-                 placeholder="Ingrese categoria"
-              />
+              >
+                {
+                  categorias.map(categoria => (
+                    <option key={categoria.id} value={categoria.id}>{categoria.nombre}</option>
+                  ))
+                }
+
+              </select>
+             
             </div>
           </div>
-
-          <div className="flex flex-col py-2">
-            <label>Marca</label>
-            <div className="flex items-center bg-blue-50  p-2 rounded-sm border-b-2 border-gray-500 dark:border-gray-200  dark:text-gray-900 dark:bg-gray-500">
-              <FaUsersCog size={25} className="text-primary" />
-              <input
-                 onChange={handleInputChange}
-                 name="marca"
-                 value={marca}
-                 className="bg-transparent p-2 outline-none w-full dark:placeholder:text-gray-600"
-                 placeholder="Ingrese marca"
-              />
-            </div>
-          </div>
-
 
 
           <div className="flex flex-col py-4">
@@ -169,7 +210,7 @@ const IngresoModal = () => {
               className="w-full text-center rounded-md bg-blue-600 text-gray-200 p-3 py-3"
             >
               <i className="far fa-save"></i>
-              <span> Guardar</span>
+              <span> Actualizar Producto</span>
             </button>
           </div>
         </form>
@@ -178,7 +219,7 @@ const IngresoModal = () => {
   );
 };
 
-export default IngresoModal;
+export default UdatateIngresoModal;
 
 const customStyles = {
   content: {
