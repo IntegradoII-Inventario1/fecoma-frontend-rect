@@ -3,6 +3,7 @@ import SidebarComponent from "../components/SidebarComponent";
 import AdminScreen from "../screens/inventory/AdminScreen";
 import DashboardScreen from "../screens/inventory/DashboardScreen";
 import IngresosScreen from "../screens/inventory/IngresosScreen";
+import VentasScreen from "../screens/inventory/VentasScreen";
 
 
 const DashboardRoute = () => {
@@ -18,6 +19,7 @@ const DashboardRoute = () => {
               <Route path="dashboard" element={<DashboardScreen />} />
               <Route path="ingresos" element={<IngresosScreen />} />
               <Route path="admin" element={<AdminScreen/>} />
+              <Route path="ventas" element={<VentasScreen/>} />
               <Route path="/" element={<DashboardScreen />} />
             
           </Routes>

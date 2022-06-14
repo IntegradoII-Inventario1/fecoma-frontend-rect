@@ -7,6 +7,7 @@ const TableCompenet = () => {
   
   return (
     <>
+    <h1>Empleados</h1>
       <div className="overflow-auto w-full h-[480px] rounded-lg shadow mb-2">
           <table className="w-full shadow-inner shadow-gray-400">
             <thead className="dark:bg-gray-900 bg-white border-b-2 border-gray-300 dark:border-gray-700">
@@ -49,24 +50,7 @@ const TableCompenet = () => {
             </tbody>
           </table>
         </div>
-        <div className="flex rounded-md p-1 justify-end gap-1 bg-white dark:bg-gray-900 text-sm font-semibold tracking-wide">
-          <button className="p-1 w-6 font-semibold bg-gray-400 bg-opacity-70 rounded-lg">
-            1
-          </button>
-          <button className="p-1 w-6 font-semibold bg-gray-400 bg-opacity-70 rounded-lg">
-            2
-          </button>
-          <button className="p-1 w-6 font-semibold bg-gray-400 bg-opacity-70 rounded-lg">
-            3
-          </button>
-          <button className="p-1 w-6 font-semibold bg-gray-400 bg-opacity-70 rounded-lg">
-            4
-          </button>
-          <button className="p-1 w-6 font-semibold bg-gray-400 bg-opacity-70 rounded-lg">
-            5
-          </button>
-          <hr className="border-gray-400 dark:border-gray-700"/>
-        </div>
+
     </>
   )
 }

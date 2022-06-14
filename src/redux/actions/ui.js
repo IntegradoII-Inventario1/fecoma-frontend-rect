@@ -3,6 +3,8 @@ import { types } from "../types/types";
 //MODAL INGRESO
 export const uiOnpenModalIngreso = () => ({type:types.uiOpenModalIngreso})
 export const uiCloseModalIngreso = () => ({type:types.uiCloseModalIngreso})
+export const uiOnpenModalUpdateIngreso = () => ({type:types.uiOpenModalUpdateIngreso})
+export const uiCloseModalUpdateIngreso = () => ({type:types.uiCloseModalUpdateIngreso})
 
 //MODAL PROVEEDOR
 export const uiOnpenModalProveedor = () => ({type:types.uiOpenModalProveedores})

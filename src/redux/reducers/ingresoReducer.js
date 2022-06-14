@@ -5,23 +5,24 @@ const initialState = {
   active:{
     id: null,
     nombre:"",
-    descipcion:"",
-    costo: 0,
-    cantidad: 0,
-    proveedor: null,
-    categoria: null,
+    decripcion:"",
+    costo:0,
+    cantidad:0,
+    proveedor:{},
+    categoria:{}
   }
 }
 
-export const ingresosReducer = (state = initialState, action) => {
+export const ingresoReducer = (state = initialState, action) => {
   switch (action.type) {
 
     case types.ingresoActive:
       return{
         ...state,
         active:{
-          ...action.payload
-        }
+          ...action.payload,
+          categoria: {id: action.payload.categoria}
+          }
       }
     case types.ingresoLoad:
       return{

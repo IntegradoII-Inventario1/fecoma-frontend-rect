@@ -1,7 +1,7 @@
 import { FaTrash } from "react-icons/fa";
 import { BsPenFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
-import { activeEmpleado, deleteEmpleado } from "../redux/actions/empleado";
+import { activeEmpleado } from "../redux/actions/empleado";
 import { uiOpenModalEmpleado } from "../redux/actions/ui";
 
 const TableUtil = ({id,nombre,apellido,direccion,dni,telefono,correo,username}) => {
@@ -16,7 +16,7 @@ const TableUtil = ({id,nombre,apellido,direccion,dni,telefono,correo,username}) 
   }
 
   const eliminar = async () => {
-    
+
   }
 
   return (

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Modal from "react-modal";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { MdOutlineDescription } from "react-icons/md";
@@ -5,39 +6,29 @@ import { FaSortNumericUpAlt } from "react-icons/fa";
 import { BsCashCoin } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import { uiCloseModalUpdateIngreso } from "../../redux/actions/ui";
-import { useForm } from "../../hooks/useForm";
-import { activeProducto, startUpdateProducto } from "../../redux/actions/ingreso";
-import { useEffect } from "react";
-import { useRef } from "react";
+import { uiCloseModalIngreso } from "../../redux/actions/ui";
+import { startCreateProducto } from "../../redux/actions/producto";
 
-const UdatateIngresoModal = () => {
-
-  const { active: producto } = useSelector((state) => state.productos);
-  const {categorias} = useSelector(state=> state.categorias)
-
+const NewIngresoModal = () => {
   const dispatch = useDispatch();
 
-  const { modalUpdateIngresoOpen } = useSelector((state) => state.ui);
+  const { modalNewIngresoOpen } = useSelector((state) => state.ui);
 
-  const [formValues, handleInputChange, reset] = useForm(producto);
+  const [formValues, setFormValues] = useState({
+    nombre: "",
+    descripcion:"",
+    costo: 0,
+    cantidad: 0,
+  });
 
-  const { nombre,descripcion, costo, cantidad, proveedor ,categoria } = formValues;
+  const { nombre,descripcion, costo, cantidad } = formValues;
 
-  const activeId = useRef(producto.id); 
-
-  useEffect(() => {
-    if(producto.id !== activeId.current){
-      reset(producto)
-      activeId.current = producto.id
-    }
-  }, [producto,reset])
-
-  useEffect(() => {
-    dispatch(activeProducto(formValues.id,{...formValues}))
-  }, [formValues,dispatch])
-  
-
+  const handleInputChange = ({ target }) => {
+    setFormValues({
+      ...formValues,
+      [target.name]: target.value,
+    });
+  };
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
@@ -46,49 +37,31 @@ const UdatateIngresoModal = () => {
       descripcion.trim().length < 1 ||
       costo < 0 ||
       cantidad < 0
+
     ) {
       return Swal.fire(
         "error",
         "Los campos son necesarios y no pueden ser vacios",
         "error"
       );
-    } else{
-        dispatch(
-          startUpdateProducto(
-            nombre,
-            descripcion,
-            costo,
-            cantidad,
-            proveedor,
-            categoria,
-          )
-        ); 
-      
+    } else {
+        dispatch(startCreateProducto(nombre,descripcion, costo, cantidad )); 
     }
     closeModal();
   };
 
   const closeModal = () => {
-    dispatch(uiCloseModalUpdateIngreso());
-    reset({
-      id: null,
-      nombre:"",
-      descipcion:"",
-      costo: 0,
-      cantidad: 0,
-      proveedor: null,
-      categoria: null
-    })
+    dispatch(uiCloseModalIngreso());
   };
 
   return (
     <Modal
-      isOpen={modalUpdateIngresoOpen}
+      isOpen={modalNewIngresoOpen}
       //onAfterOpen={afterOpenModal}
       onRequestClose={closeModal}
       style={customStyles}
       closeTimeoutMS={200}
-      className="bg-white dark:bg-gray-800 flex fixed outline-none rounded-md p-4 overflow-y-auto"
+      className="bg-white dark:bg-gray-800 flex fixed outline-none rounded-md p-4 "
       overlayClassName="modal-fondo"
     >
       <div className="max-w-[400px] dark:text-gray-200 w-[270px] h-[500px] max-h-[540px] md:w-[400px] md:h-[540px] p-2">
@@ -157,60 +130,13 @@ const UdatateIngresoModal = () => {
             </div>
           </div>
 
-          
-          <div className="flex flex-col py-2">
-            <label>Marca</label>
-            <div className="flex items-center bg-blue-50  p-2 rounded-sm border-b-2 border-gray-500 dark:border-gray-200  dark:text-gray-900 dark:bg-gray-500">
-              <FaSortNumericUpAlt size={25} className="text-primary" />
-              <select
-                 type="text"
-                 onChange={handleInputChange}
-                 name={proveedor}
-                 value={proveedor}
-                 id={proveedor}
-                 className="bg-transparent p-2 outline-none w-full dark:placeholder:text-gray-600"
-              >
-                <option value="proveedor">Proveedor 1</option>
-                <option value="proveedor">Proveedor 2</option>
-                <option value="proveedor">Proveedor 3</option>
-                <option value="proveedor">Proveedor 4</option>
-              </select>
-             
-            </div>
-          </div>
-
-
-          <div className="flex flex-col py-2">
-            <label>Categoria</label>
-            <div className="flex items-center bg-blue-50  p-2 rounded-sm border-b-2 border-gray-500 dark:border-gray-200  dark:text-gray-900 dark:bg-gray-500">
-              <FaSortNumericUpAlt size={25} className="text-primary" />
-              <select
-                 type="text"
-                 onChange={handleInputChange}
-                 name={categoria}
-                 value={categoria}
-                 id={categoria}
-                 className="bg-transparent p-2 outline-none w-full dark:placeholder:text-gray-600"
-              >
-                {
-                  categorias.map(categoria => (
-                    <option key={categoria.id} value={categoria.id}>{categoria.nombre}</option>
-                  ))
-                }
-
-              </select>
-             
-            </div>
-          </div>
-
-
           <div className="flex flex-col py-4">
             <button
               type="submit"
               className="w-full text-center rounded-md bg-blue-600 text-gray-200 p-3 py-3"
             >
               <i className="far fa-save"></i>
-              <span> Actualizar Producto</span>
+              <span> Guardar</span>
             </button>
           </div>
         </form>
@@ -219,7 +145,7 @@ const UdatateIngresoModal = () => {
   );
 };
 
-export default UdatateIngresoModal;
+export default NewIngresoModal;
 
 const customStyles = {
   content: {

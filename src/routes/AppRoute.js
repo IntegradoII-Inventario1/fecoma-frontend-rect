@@ -2,7 +2,10 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { renewToken } from "../redux/actions/auth"
+import { getAllCategorias } from "../redux/actions/categoria"
 import { getAllEmpleados } from "../redux/actions/empleado"
+import { getAllProductos } from "../redux/actions/producto"
+
 import AuthRoute from "./AuthRoute"
 import DashboardRoute from "./DashboardRoute"
 import { PrivateRoute } from "./PrivateRoute"
@@ -19,6 +22,9 @@ const AppRoute = () => {
   useEffect(() => {
     dispatch(renewToken(token))
     dispatch(getAllEmpleados())
+    dispatch(getAllProductos())
+    dispatch(getAllCategorias())
+
   }, [dispatch,token])
 
   if(checking){

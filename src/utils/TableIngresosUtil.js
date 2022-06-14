@@ -1,43 +1,47 @@
 import { FaTrash } from "react-icons/fa";
 import { BsPenFill } from "react-icons/bs";
-import { useDispatch } from "react-redux";
 import { uiOnpenModalUpdateIngreso } from "../redux/actions/ui";
-import { activeProducto } from "../redux/actions/ingreso";
+import { activeProducto } from "../redux/actions/producto";
+import { useDispatch } from "react-redux";
 
-const TableIngresosUtil = ({id,nombre,descripcion,costo,cantidad,proveedor,categoria}) => {
+
+const TableIngresosUtil = (producto) => {
+
+  const {id ,nombre, descripcion, costo,cantidad,proveedor,categoria} = producto
 
   const dispatch = useDispatch()
 
-  const obtener = async () => {
+
+  const obtener =  () => {
     dispatch(uiOnpenModalUpdateIngreso());
-    await dispatch(activeProducto(id,{
-      nombre,descripcion,costo,cantidad,proveedor,categoria
+    dispatch(activeProducto(id,{
+      nombre, descripcion, costo,cantidad,proveedor,categoria
     }))
   }
 
-  const eliminar = async () => {
+  const eliminar =  () => {
     
   }
 
   return (
-    <tr className="dark:bg-gray-700 bg-white">
+    <tr key={producto.id} className="dark:bg-gray-700 bg-white">
       <td className="p-3 text-sm dark:text-gray-300 whitespace-nowrap">
-        {nombre}
+        {producto.nombre}
       </td>
       <td className="p-3 text-sm dark:text-gray-300 whitespace-nowrap">
-        {descripcion}
+        {producto.descripcion}
       </td>
       <td className="p-3 text-sm dark:text-gray-300 whitespace-nowrap">
-        {costo}
+        {producto.costo}
       </td>
       <td className="p-3 text-sm dark:text-gray-300 whitespace-nowrap">
-        {cantidad}
+        {producto.cantidad}
       </td>
       <td className="p-3 text-sm dark:text-green-300 cursor-pointer active:scale-95 whitespace-nowrap">
-        {!!proveedor ? proveedor : "no asignado"}
+        {producto.proveedor ? producto.proveedor.nombre : "no asignado"}
       </td>
       <td className="p-3 text-sm dark:text-green-300 cursor-pointer active:scale-95 whitespace-nowrap">
-        {!!categoria ? categoria : "no asignado"}
+        {producto.categoria ? producto.categoria.nombre : "no asignado"}
       </td>
 
       <td className="p-3 text-sm flex gap-x-2 text-white dark:text-gray-300 whitespace-nowrap">
@@ -51,7 +55,8 @@ const TableIngresosUtil = ({id,nombre,descripcion,costo,cantidad,proveedor,categ
           <FaTrash />
         </p>
       </td>
-    </tr>
+  </tr>
+    
   );
 };
 
