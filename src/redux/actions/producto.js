@@ -14,11 +14,11 @@ export const getAllProductos = () => {
   }
 }
 
-export const startCreateProducto = (nombre, descripcion, costo,cantidad) => {
+export const startCreateProducto = (nombre, descripcion, costo,precio,cantidad) => {
   return async(dispatch) => {
 
       const resp = await fetchConToken('api/v1/producto/crear',{
-        nombre, descripcion, costo,cantidad
+        nombre, descripcion, costo,precio,cantidad
       },'POST').catch(e => console.log(e))
       const body = await resp.json()
       Swal.fire('Producto Creado',body.mensaje,'success')
@@ -46,19 +46,20 @@ export const activeProducto = (id,producto) => ({
 })
 
 
-export const startUpdateProducto = (id,nombre, descripcion, costo,cantidad,proveedors,categorias) => {
+export const startUpdateProducto = (id,nombre, descripcion, costo,precio,cantidad,proveedors,categorias) => {
   return async(dispatch) => {
     let proveedor  = null
     let categoria = null
-    if(categorias){
+    if(categorias && categorias.id !== null){
       categoria = {id:categorias}
     }
-    if(proveedors){
+    if(proveedors && proveedors.id !== null){
       proveedor = {id:proveedors}
+      console.log("proveedor");
     }
-    console.log(categoria,proveedor);
+
     const resp = await fetchConToken(`api/v1/producto/edit/${id}`,{
-      nombre, descripcion, costo,cantidad,proveedor,categoria
+      nombre, descripcion, costo,precio,cantidad,proveedor,categoria
     },'PUT').catch (e => console.log(e)) 
       const body = await resp.json()
       console.log(body);

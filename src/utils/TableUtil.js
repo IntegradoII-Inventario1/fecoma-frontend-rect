@@ -1,22 +1,56 @@
-import { FaTrash } from "react-icons/fa";
-import { BsPenFill } from "react-icons/bs";
+import { BsPenFill,BsToggleOff,BsToggleOn } from "react-icons/bs";
 import { useDispatch } from "react-redux";
-import { activeEmpleado } from "../redux/actions/empleado";
+import Swal from "sweetalert2";
+import { activeEmpleado, changeStateOFF, changeStateON } from "../redux/actions/empleado";
 import { uiOpenModalEmpleado } from "../redux/actions/ui";
 
-const TableUtil = ({id,nombre,apellido,direccion,dni,telefono,correo,username}) => {
+const TableUtil = ({id,nombre,apellido,direccion,dni,telefono,correo,username,enabled}) => {
 
   const dispatch = useDispatch()
 
   const obtener = async () => {
     dispatch(uiOpenModalEmpleado());
     await dispatch(activeEmpleado(id,{
-      nombre,apellido,direccion,dni,telefono,correo,username
+      nombre,apellido,direccion,dni,telefono,correo,username,enabled
     }))
   }
 
-  const eliminar = async () => {
+  const desactivar = async () => {
+    dispatch(activeEmpleado(id,{
+      nombre,apellido,direccion,dni,telefono,correo,username,enabled
+    }))
+    Swal.fire({
+      title: 'Esta seguro de desactivar la cuenta del empleado?',
+      text: "Esta acción no le permitira tener acceso a la pagina",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, desactivalo!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(changeStateOFF(id,nombre,apellido,direccion,dni,telefono,correo,username,enabled))
+      }
+    })
+  }
 
+  const activar = async () => {
+    dispatch(activeEmpleado(id,{
+      nombre,apellido,direccion,dni,telefono,correo,username,enabled
+    }))
+    Swal.fire({
+      title: 'Esta seguro de activar la cuenta del empleado?',
+      text: "Esta acción le permitira tener acceso a la pagina",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, activalo!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(changeStateON(id,nombre,apellido,direccion,dni,telefono,correo,username,enabled))
+      }
+    })
   }
 
   return (
@@ -53,9 +87,18 @@ const TableUtil = ({id,nombre,apellido,direccion,dni,telefono,correo,username}) 
         >
           <BsPenFill />
         </p>
-        <p onClick={eliminar} className="p-2 active:scale-95 bg-red-400 dark:bg-opacity-70 rounded-lg">
-          <FaTrash />
-        </p>
+        {
+          enabled ? (
+            <p onClick={desactivar} className="p-2 active:scale-95 bg-green-400 dark:bg-opacity-70 rounded-lg">
+              <BsToggleOn />
+            </p>
+          ) : 
+          (
+            <p onClick={activar} className="p-2 active:scale-95 bg-red-400 dark:bg-opacity-70 rounded-lg">
+            <BsToggleOff />
+            </p>
+          )
+        }
       </td>
     </tr>
   );

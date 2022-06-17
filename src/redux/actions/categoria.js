@@ -8,7 +8,7 @@ export const CrearCategoria = (nombre, descripcion) => {
       nombre, descripcion
     },'POST')
     const body = await resp.json();
-    Swal.fire("Categoria Actualizada",body.mensaje,"success");
+    Swal.fire("Categoria Creada",body.mensaje,"success");
     dispatch(getAllCategorias())
   }
 }

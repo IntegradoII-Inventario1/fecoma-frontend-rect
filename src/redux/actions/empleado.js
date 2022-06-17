@@ -33,10 +33,10 @@ export const activeEmpleado = (id,empleado) => ({
 })
 
 
-export const startUpdateEmpleado = (id,nombre, apellido, direccion,dni, telefono, correo, username, password) => {
+export const startUpdateEmpleado = (id,nombre, apellido, direccion,dni, telefono, correo, username, password,enabled=true) => {
   return async(dispatch) => {
     const resp = await fetchConToken(`api/v1/empleado/edit/${id}`,{
-      nombre, apellido, direccion,dni, telefono, correo, username, password
+      nombre, apellido, direccion,dni, telefono, correo, username, password,enabled
     },'PUT')
     const body = await resp.json();
     Swal.fire("Empleado Actualizado","Empleado Actualizado con exito","success");
@@ -58,3 +58,26 @@ export const deleteEmpleado = (id) => {
   }
 }
 
+export const changeStateON = (id,nombre, apellido, direccion,dni, telefono, correo, username, password,enabled=true) => {
+  return async(dispatch) => {
+    const resp = await fetchConToken(`api/v1/empleado/edit/${id}`,{
+      nombre, apellido, direccion,dni, telefono, correo, username, password,enabled
+    },'PUT')
+    const body = await resp.json();
+    Swal.fire("Empleado Activado","El empleado se activado con exito","success");
+    console.log(body);
+    dispatch(getAllEmpleados())
+  }
+}
+
+export const changeStateOFF = (id,nombre, apellido, direccion,dni, telefono, correo, username, password,enabled=false) => {
+  return async(dispatch) => {
+    const resp = await fetchConToken(`api/v1/empleado/edit/${id}`,{
+      nombre, apellido, direccion,dni, telefono, correo, username, password,enabled
+    },'PUT')
+    const body = await resp.json();
+    Swal.fire("Empleado Desactivado","El empleado se desactivado con exito","success");
+    console.log(body);
+    dispatch(getAllEmpleados())
+  }
+}

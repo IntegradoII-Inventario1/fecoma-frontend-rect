@@ -12,7 +12,8 @@ const initialState = {
     correo:"",
     username:"",
     password:"",
-    password2:""
+    password2:"",
+    enabled:null,
   }
 }
 

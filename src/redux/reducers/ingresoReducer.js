@@ -7,6 +7,7 @@ const initialState = {
     nombre:"",
     decripcion:"",
     costo:0,
+    precio:0,
     cantidad:0,
     proveedor:{},
     categoria:{}

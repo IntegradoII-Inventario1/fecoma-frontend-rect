@@ -1,13 +1,14 @@
 import { FaTrash } from "react-icons/fa";
 import { BsPenFill } from "react-icons/bs";
 import { uiOnpenModalUpdateIngreso } from "../redux/actions/ui";
-import { activeProducto } from "../redux/actions/producto";
+import { activeProducto, deleteProducto } from "../redux/actions/producto";
 import { useDispatch } from "react-redux";
+import Swal from "sweetalert2";
 
 
 const TableIngresosUtil = (producto) => {
 
-  const {id ,nombre, descripcion, costo,cantidad,proveedor,categoria} = producto
+  const {id ,nombre, descripcion, costo,precio,cantidad,proveedor,categoria} = producto
 
   const dispatch = useDispatch()
 
@@ -15,12 +16,24 @@ const TableIngresosUtil = (producto) => {
   const obtener =  () => {
     dispatch(uiOnpenModalUpdateIngreso());
     dispatch(activeProducto(id,{
-      nombre, descripcion, costo,cantidad,proveedor,categoria
+      nombre, descripcion, costo,precio,cantidad,proveedor,categoria
     }))
   }
 
   const eliminar =  () => {
-    
+    Swal.fire({
+      title: 'Esta seguro de eliminar este producto?',
+      text: "Esta acción no se puede revertir",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminalo!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteProducto(id))
+      }
+    })
   }
 
   return (
@@ -33,6 +46,9 @@ const TableIngresosUtil = (producto) => {
       </td>
       <td className="p-3 text-sm dark:text-gray-300 whitespace-nowrap">
         {producto.costo}
+      </td>
+      <td className="p-3 text-sm dark:text-gray-300 whitespace-nowrap">
+        {producto.precio}
       </td>
       <td className="p-3 text-sm dark:text-gray-300 whitespace-nowrap">
         {producto.cantidad}

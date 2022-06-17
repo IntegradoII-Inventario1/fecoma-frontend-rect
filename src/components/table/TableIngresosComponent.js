@@ -23,6 +23,9 @@ const TableIngresosComponent = () => {
                   Costo
                 </th>
                 <th className="p-3 text-sm font-semibold tracking-wide text-left">
+                  Precio
+                </th>
+                <th className="p-3 text-sm font-semibold tracking-wide text-left">
                   Cantidad
                 </th>
                 <th className="p-3 text-sm font-semibold tracking-wide text-left">

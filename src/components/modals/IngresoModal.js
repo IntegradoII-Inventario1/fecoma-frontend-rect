@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import Modal from "react-modal";
 import { AiOutlineUserAdd } from "react-icons/ai";
-import { FaUsersCog } from "react-icons/fa";
 import { BiCategory } from "react-icons/bi";
 import { MdOutlineDescription } from "react-icons/md";
 import { FaSortNumericUpAlt } from "react-icons/fa";
@@ -19,7 +18,7 @@ const IngresoModal = () => {
 
   const { modalIngresoOpen } = useSelector((state) => state.ui);
   const [formValues, handleInputChange, reset] = useForm(producto);
-  const {nombre,descripcion,costo,cantidad,proveedor,categoria} = formValues;
+  const {nombre,descripcion,costo,precio,cantidad,proveedor,categoria} = formValues;
 
   const activeId = useRef(producto.id);
 
@@ -40,6 +39,7 @@ const IngresoModal = () => {
       nombre.trim().length < 1 ||
       descripcion.trim().length < 1 ||
       costo < 0 ||
+      precio < 0 ||
       cantidad < 0
     ) {
       return Swal.fire(
@@ -48,7 +48,7 @@ const IngresoModal = () => {
         "error"
       );
     } else {
-      dispatch(startUpdateProducto(formValues.id,nombre,descripcion,costo,cantidad,proveedor,categoria))
+      dispatch(startUpdateProducto(formValues.id,nombre,descripcion,costo,precio,cantidad,proveedor,categoria))
     }
     closeModal();
   };
@@ -114,6 +114,21 @@ const IngresoModal = () => {
                  value={costo}
                  className="bg-transparent p-2 outline-none w-full dark:placeholder:text-gray-600"
                  placeholder="Ingrese costo"
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col py-2">
+            <label>Precio</label>
+            <div className="flex items-center bg-blue-50  p-2 rounded-sm border-b-2 border-gray-500 dark:border-gray-200  dark:text-gray-900 dark:bg-gray-500">
+              <BsCashCoin size={25} className="text-primary" />
+              <input
+                 type="number"
+                 onChange={handleInputChange}
+                 name="precio"
+                 value={precio}
+                 className="bg-transparent p-2 outline-none w-full dark:placeholder:text-gray-600"
+                 placeholder="Ingrese precio"
               />
             </div>
           </div>

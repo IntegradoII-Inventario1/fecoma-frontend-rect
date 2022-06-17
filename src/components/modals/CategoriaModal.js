@@ -1,41 +1,46 @@
-import { useState } from "react";
 import Modal from "react-modal";
 import { MdOutlineDescription } from "react-icons/md";
 import { BiRename } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { uiCloseModalCategoria } from "../../redux/actions/ui";
+import { CrearCategoria } from "../../redux/actions/categoria";
+import { useForm } from "../../hooks/useForm";
 
 const CategoriaModal = () => {
   const dispatch = useDispatch();
 
   const { modalCategoriaOpen } = useSelector((state) => state.ui);
 
-  const [formValues, setFormValues] = useState({
+  const [formValues, handleInputChange, reset] = useForm({
     nombre: "",
     descripcion: "",
   });
 
   const { nombre, descripcion } = formValues;
 
-  const handleInputChange = ({ target }) => {
-    setFormValues({
-      ...formValues,
-      [target.name]: target.value,
-    });
-  };
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
     if (nombre.trim().length < 1 || descripcion.trim().length < 1) {
-      return Swal.fire("error,error,error");
+      return Swal.fire(
+        "error",
+        "Los campos son necesarios y no pueden ser vacios",
+        "error"
+      );
+    } else {
+        dispatch(CrearCategoria(nombre,descripcion)); 
     }
     closeModal();
-    console.log(formValues);
   };
 
   const closeModal = () => {
     dispatch(uiCloseModalCategoria());
+    reset({
+      id: null,
+      nombre:"",
+      descripcion:""
+    });
   };
   return (
     <Modal
@@ -58,6 +63,7 @@ const CategoriaModal = () => {
               <input
                 onChange={handleInputChange}
                 name="nombre"
+                autoComplete="off"
                 value={nombre}
                 className="bg-transparent p-2 outline-none w-full dark:text-gray-200 dark:placeholder:text-gray-600"
                 placeholder="Ingrese nombre"
@@ -73,6 +79,7 @@ const CategoriaModal = () => {
                 type="text"
                 onChange={handleInputChange}
                 name="descripcion"
+                autoComplete="off"
                 value={descripcion}
                 rows="2"
                 className="bg-transparent p-2 outline-none w-full dark:text-gray-200 dark:placeholder:text-gray-600"

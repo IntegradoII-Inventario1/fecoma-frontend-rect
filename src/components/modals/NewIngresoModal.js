@@ -18,10 +18,11 @@ const NewIngresoModal = () => {
     nombre: "",
     descripcion:"",
     costo: 0,
+    precio: 0,
     cantidad: 0,
   });
 
-  const { nombre,descripcion, costo, cantidad } = formValues;
+  const { nombre,descripcion, costo,precio, cantidad } = formValues;
 
   const handleInputChange = ({ target }) => {
     setFormValues({
@@ -36,6 +37,7 @@ const NewIngresoModal = () => {
       nombre.trim().length < 1 ||
       descripcion.trim().length < 1 ||
       costo < 0 ||
+      precio < 0 ||
       cantidad < 0
 
     ) {
@@ -45,7 +47,7 @@ const NewIngresoModal = () => {
         "error"
       );
     } else {
-        dispatch(startCreateProducto(nombre,descripcion, costo, cantidad )); 
+        dispatch(startCreateProducto(nombre,descripcion, costo,precio, cantidad )); 
     }
     closeModal();
   };
@@ -64,7 +66,7 @@ const NewIngresoModal = () => {
       className="bg-white dark:bg-gray-800 flex fixed outline-none rounded-md p-4 "
       overlayClassName="modal-fondo"
     >
-      <div className="max-w-[400px] dark:text-gray-200 w-[270px] h-[500px] max-h-[540px] md:w-[400px] md:h-[540px] p-2">
+      <div className="max-w-[400px] dark:text-gray-200 w-[270px] h-[500px] max-h-[540px] md:w-[400px] md:h-[540px] p-2 overflow-y-auto">
         <h1 className="text-2xl font-bold text-center dark:text-white text-gray-600 py-1">
           Nuevo producto
         </h1>
@@ -111,6 +113,21 @@ const NewIngresoModal = () => {
                  value={costo}
                  className="bg-transparent p-2 outline-none w-full dark:placeholder:text-gray-600"
                  placeholder="Ingrese costo"
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col py-2">
+            <label>Precio</label>
+            <div className="flex items-center bg-blue-50  p-2 rounded-sm border-b-2 border-gray-500 dark:border-gray-200  dark:text-gray-900 dark:bg-gray-500">
+              <BsCashCoin size={25} className="text-primary" />
+              <input
+                 type={"number"}
+                 onChange={handleInputChange}
+                 name="precio"
+                 value={precio}
+                 className="bg-transparent p-2 outline-none w-full dark:placeholder:text-gray-600"
+                 placeholder="Ingrese precio"
               />
             </div>
           </div>
