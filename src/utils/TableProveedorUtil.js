@@ -4,14 +4,14 @@ import { useDispatch } from "react-redux";
 import Swal from 'sweetalert2';
 import { deleteCategoria } from '../redux/actions/categoria';
 
-const TableCategoriaUtil = ({id,nombre,descripcion}) => {
+const TableProveedorUtil = ({id,nombre,ruc,direccion}) => {
 
   const dispatch = useDispatch()
 
 
   const eliminar = async () => {
     Swal.fire({
-      title: 'Esta seguro de eliminar esta categoria?',
+      title: 'Esta seguro de eliminar este proveedor?',
       text: "Esta acción no se puede revertir",
       icon: 'warning',
       showCancelButton: true,
@@ -31,7 +31,13 @@ const TableCategoriaUtil = ({id,nombre,descripcion}) => {
         {nombre}
       </td>
       <td className="p-3 text-sm dark:text-gray-300 whitespace-nowrap">
-        {descripcion}
+        {ruc}
+      </td>
+      <td className="p-3 text-sm dark:text-gray-300 whitespace-nowrap">
+        {direccion}
+      </td>
+      <td className="p-3 text-sm dark:text-gray-300 whitespace-nowrap">
+        no asignado
       </td>
       <td className="p-3 text-sm flex gap-x-2 text-white dark:text-gray-300 whitespace-nowrap">
         <p onClick={eliminar} className="p-2 active:scale-95 bg-red-400 dark:bg-opacity-70 rounded-lg">
@@ -42,4 +48,4 @@ const TableCategoriaUtil = ({id,nombre,descripcion}) => {
   )
 }
 
-export default TableCategoriaUtil
+export default TableProveedorUtil

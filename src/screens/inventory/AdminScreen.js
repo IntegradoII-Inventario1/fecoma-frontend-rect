@@ -6,10 +6,12 @@ import EmpleadoModal from '../../components/modals/EmpleadoModal';
 import CategoriaModal from '../../components/modals/CategoriaModal';
 import PuestoModal from '../../components/modals/PuestoModal';
 import { useDispatch } from "react-redux";
-import { uiOpenModalCategoria, uiOpenModalNewEmpleado, uiOpenModalPuesto } from "../../redux/actions/ui";
+import { uiOnpenModalNewProveedor, uiOpenModalCategoria, uiOpenModalNewEmpleado, uiOpenModalPuesto } from "../../redux/actions/ui";
 import TableCompenet from "../../components/TableCompenet";
 import NewEmpleadoModal from "../../components/modals/NewEmpleadoModal";
 import TableCategoriaComponent from "../../components/table/TableCategoriaComponent";
+import NewProveedorModal from "../../components/modals/NewProveedorModal";
+import TableProveedorComponent from "../../components/table/TableProveedorComponent";
 
 const AdminScreen = () => {
 
@@ -17,6 +19,9 @@ const AdminScreen = () => {
 
   const abrirModal = () => {
     dispatch(uiOpenModalNewEmpleado());
+  };
+  const abrirModalProveedor = () => {
+    dispatch(uiOnpenModalNewProveedor());
   };
   const abrirModal1 = () => {
     dispatch(uiOpenModalCategoria());
@@ -52,6 +57,17 @@ const AdminScreen = () => {
             </button>
           </div>
           <CategoriaModal></CategoriaModal>
+
+          <div className="flex justify-between p-1 items-center  w-full md:w-fit">
+            <button
+              onClick={abrirModalProveedor}
+              className=" flex justify-center items-center gap-x-2  w-full bg-blue-600 dark:bg-opacity-70 md:mb-10  text-white dark:text-gray-300 p-2 font-semibold rounded-lg active:scale-95 hover:bg-blue-500 cursor-pointer outline-none"
+            >
+              <HiViewGridAdd size={25} />
+              Proveedor
+            </button>
+          </div>
+          <NewProveedorModal/>
           
           <div className="flex justify-between p-1 items-center w-full md:w-fit ">
             <button
@@ -75,6 +91,9 @@ const AdminScreen = () => {
 
         <TableCategoriaComponent/>
         
+        <hr className="border-gray-400 mb-4 dark:border-gray-700"/>
+
+        <TableProveedorComponent/>
 
         
       </div>

@@ -5,6 +5,7 @@ import { renewToken } from "../redux/actions/auth"
 import { getAllCategorias } from "../redux/actions/categoria"
 import { getAllEmpleados } from "../redux/actions/empleado"
 import { getAllProductos } from "../redux/actions/producto"
+import { getAllProveedor } from "../redux/actions/proveedor"
 
 import AuthRoute from "./AuthRoute"
 import DashboardRoute from "./DashboardRoute"
@@ -24,6 +25,7 @@ const AppRoute = () => {
     dispatch(getAllEmpleados())
     dispatch(getAllProductos())
     dispatch(getAllCategorias())
+    dispatch(getAllProveedor())
 
   }, [dispatch,token])
 

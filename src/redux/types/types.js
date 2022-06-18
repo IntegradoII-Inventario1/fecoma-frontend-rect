@@ -1,6 +1,10 @@
 export const types = {
 
   //UI: MODAL
+  uiOpenModalProveedor:'[ui] Open modal proveedor',
+  uiCloseModalProveedor:'[ui] Close modal proveedor',
+  uiOpenModalNewProveedor:'[ui] Open modal new proveedor',
+  uiCloseModalNewProveedor:'[ui] Close modal new proveedor',
   uiOpenModalIngreso:'[ui] Open modal ingreso',
   uiCloseModalIngreso:'[ui] Close modal ingreso',
   uiOpenModalUpdateIngreso:'[ui] Open modal update ingreso',
@@ -42,9 +46,21 @@ export const types = {
   ingresoDelete:'[ingreso] Delete producto',
   ingresoClean:'[ingreso] Clean producto',
 
+  ventaActive:'[venta] Set active productofiltrado',
+  ventaLoad:'[venta] Load productofiltrado',
+  ventaUpdated:'[venta] Update productofiltrado',
+  ventaDelete:'[venta] Delete productofiltrado',
+  ventaClean:'[venta] Clean productofiltrado',
+
   categoriaActive:'[categoria] Set active producto',
   categoriaLoad:'[categoria] Load producto',
   categoriaUpdated:'[categoria] Update producto',
   categoriaDelete:'[categoria] Delete producto',
   categoriaClean:'[categoria] Clean producto',
+
+  proveedorActive:'[proveedor] Set active proveedor',
+  proveedorLoad:'[proveedor] Load proveedor',
+  proveedorUpdated:'[proveedor] Update proveedor',
+  proveedorDelete:'[proveedor] Delete proveedor',
+  proveedorClean:'[proveedor] Clean proveedor',
 }

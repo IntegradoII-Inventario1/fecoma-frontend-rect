@@ -1,13 +1,14 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
-import TableUtil from '../../utils/TableUtil';
+import TableProveedorUtil from '../../utils/TableProveedorUtil';
 
-const TableCompenet = () => {
+const TableProveedorComponent = () => {
 
-  const {empleados} = useSelector(state=> state.empleados)
-  
+  const {proveedores} = useSelector(state=> state.proveedor)
+
   return (
     <>
+    <h1>Proveedores</h1>
       <div className="overflow-auto w-full h-min rounded-lg shadow mb-2">
           <table className="w-full shadow-inner shadow-gray-400">
             <thead className="dark:bg-gray-900 bg-white border-b-2 border-gray-300 dark:border-gray-700">
@@ -16,25 +17,13 @@ const TableCompenet = () => {
                   Nombre
                 </th>
                 <th className="p-3 text-sm font-semibold tracking-wide text-left">
-                  Apellido
+                  ruc
                 </th>
                 <th className="p-3 text-sm font-semibold tracking-wide text-left">
-                  Direccion
+                  direccion
                 </th>
                 <th className="p-3 text-sm font-semibold tracking-wide text-left">
-                  Dni
-                </th>
-                <th className="p-3 text-sm font-semibold tracking-wide text-left">
-                  Telefono
-                </th>
-                <th className="p-3 text-sm font-semibold tracking-wide text-left">
-                  Correo
-                </th>
-                <th className="p-3 text-sm font-semibold tracking-wide text-left">
-                  Username
-                </th>
-                <th className="p-3 text-sm font-semibold tracking-wide text-left">
-                  Password
+                  representante
                 </th>
                 <th className="p-3 text-sm font-semibold tracking-wide text-left">
                   Opciones
@@ -43,8 +32,8 @@ const TableCompenet = () => {
             </thead>
             <tbody className="divide-y dark:divide-gray-600">
               {
-                empleados.map(empleado => (
-                  <TableUtil key={empleado.id} {...empleado}/>
+                proveedores.map(proveedor => (
+                  <TableProveedorUtil key={proveedor.id} {...proveedor}/>
                 ))
               }
             </tbody>
@@ -54,4 +43,4 @@ const TableCompenet = () => {
   )
 }
 
-export default TableCompenet
+export default TableProveedorComponent

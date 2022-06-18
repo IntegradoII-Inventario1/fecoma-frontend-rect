@@ -3,7 +3,8 @@ import { types } from "../types/types";
 const initialState = {
   modalIngresoOpen: false,
   modalNewIngresoOpen: false,
-  modalProvedorOpen: false,
+  modalProveedorOpen: false,
+  modalNewProveedorOpen: false,
   modalVentaOpen: false,
   modalEmpleadoOpen: false,
   modalNewEmpleadoOpen: false,
@@ -26,6 +27,17 @@ export const uiReducer = (state = initialState, action) => {
         ...state,
         modalNewIngresoOpen: false,
       };
+    case types.uiOpenModalProveedor:
+      return {
+        ...state,
+        modalProveedorOpen: true,
+      };
+
+    case types.uiCloseModalProveedor:
+      return {
+        ...state,
+        modalProveedorOpen: false,
+      };
     case types.uiOpenModalUpdateIngreso:
       return {
         ...state,
@@ -37,16 +49,16 @@ export const uiReducer = (state = initialState, action) => {
         ...state,
         modalIngresoOpen: false,
       };
-    case types.uiOpenModalProveedores:
+    case types.uiOpenModalNewProveedor:
       return {
         ...state,
-        modalProvedorOpen: true,
+        modalNewProveedorOpen: true,
       };
 
-    case types.uiCloseModalProveedores:
+    case types.uiCloseModalNewProveedor:
       return {
         ...state,
-        modalProvedorOpen: false,
+        modalNewProveedorOpen: false,
       };
     case types.uiOpenModalVentas:
       return {

@@ -4,6 +4,8 @@ import { authReducer } from './authReducer'
 import { empleadoReducer } from "./empleadoReducer";
 import { ingresoReducer } from "./ingresoReducer";
 import { categoriaReducer } from "./categoriaReducer";
+import { ventaReducer } from "./ventaReducer";
+import { proveedorReducer } from "./proveedorReducer";
 
 
 export const rootReducer = combineReducers({
@@ -11,5 +13,7 @@ export const rootReducer = combineReducers({
   auth: authReducer,
   empleados: empleadoReducer,
   productos:ingresoReducer,
-  categorias:categoriaReducer
+  categorias:categoriaReducer,
+  ventas:ventaReducer,
+  proveedor:proveedorReducer
 })

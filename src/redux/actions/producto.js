@@ -20,6 +20,7 @@ export const startCreateProducto = (nombre, descripcion, costo,precio,cantidad) 
       const resp = await fetchConToken('api/v1/producto/crear',{
         nombre, descripcion, costo,precio,cantidad
       },'POST').catch(e => console.log(e))
+      console.log(resp);
       const body = await resp.json()
       Swal.fire('Producto Creado',body.mensaje,'success')
       dispatch(getAllProductos())
@@ -77,3 +78,18 @@ export const deleteProducto = (id) => {
   }
 }
 
+export const setProductosFiltrado = (producto) => ({
+  type: types.ventaLoad,
+  payload: producto
+})
+
+export const startCreateFactura = (descripcion, observacion, createAt=Date.now(),usuario,items,total) => {
+  return async() => {
+      const resp = await fetchConToken('api/v1/factura/crear',{
+        descripcion, observacion,createAt,usuario,items,total
+      },'POST').catch(e => console.log(e))
+      console.log(resp);
+      await resp.json()
+      Swal.fire('Factura Creado',"La factura se creo con exito",'success')      
+  }
+}

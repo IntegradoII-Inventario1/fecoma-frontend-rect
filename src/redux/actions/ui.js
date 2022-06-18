@@ -7,8 +7,10 @@ export const uiOnpenModalUpdateIngreso = () => ({type:types.uiOpenModalUpdateIng
 export const uiCloseModalUpdateIngreso = () => ({type:types.uiCloseModalUpdateIngreso})
 
 //MODAL PROVEEDOR
-export const uiOnpenModalProveedor = () => ({type:types.uiOpenModalProveedores})
-export const uiCloseModalProveedor = () => ({type:types.uiCloseModalProveedores})
+export const uiOnpenModalNewProveedor = () => ({type:types.uiOpenModalNewProveedor})
+export const uiCloseModalNewProveedor = () => ({type:types.uiCloseModalNewProveedor})
+export const uiOnpenModalProveedor = () => ({type:types.uiOpenModalProveedor})
+export const uiCloseModalProveedor = () => ({type:types.uiCloseModalProveedor})
 
 //MODAL VENTAS
 export const uiOnpenModalVenta = () => ({type:types.uiOpenModalVentas})

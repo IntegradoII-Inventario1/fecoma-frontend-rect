@@ -9,7 +9,7 @@ const TableCategoriaComponent = () => {
   return (
     <>
     <h1>Categorias</h1>
-      <div className="overflow-auto w-full h-[480px] rounded-lg shadow mb-2">
+      <div className="overflow-auto w-full h-min rounded-lg shadow mb-2">
           <table className="w-full shadow-inner shadow-gray-400">
             <thead className="dark:bg-gray-900 bg-white border-b-2 border-gray-300 dark:border-gray-700">
               <tr>
